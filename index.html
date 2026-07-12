@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo Jaerisch — Art Direction & Design, Hamburg</title>
+<meta name="description" content="Leo Jaerisch is a Hamburg-based art director, graphic designer and founder of Künstlerbörse. Brand, campaign and motion work — with AI deep in the process.">
+<meta property="og:title" content="Leo Jaerisch — Different is Everything.">
+<meta property="og:description" content="Art direction, graphic design and story. Made in Hamburg.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.leojaerisch.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Leo Jaerisch","jobTitle":"Art Director & Graphic Designer","address":{"@type":"PostalAddress","addressLocality":"Hamburg","addressCountry":"DE"},"url":"https://www.leojaerisch.com","sameAs":["https://www.instagram.com/leo_jaerisch/","https://www.kuenstlerboerse.net/"]}
+</script>
+<style>
+/* ============================================================
+   LEO JAERISCH — light editorial
+   Medien: aktuell Squarespace-URLs. Später einfach gegen
+   lokale Pfade tauschen (assets/...). Video-Kacheln: im
+   TILES-Array type:"video" + src auf .mp4 setzen.
+   ============================================================ */
+:root{
+  --bg:#FCFCFA;
+  --ink:#141414;
+  --mut:#7A7973;
+  --hair:rgba(20,20,20,.12);
+  --serif:'Instrument Serif',serif;
+  --sans:'Hanken Grotesk',sans-serif;
+  --r:10px;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.55;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ink);color:var(--bg)}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.serif{font-family:var(--serif);font-weight:400}
+.small{font-size:12.5px;letter-spacing:.01em;color:var(--mut)}
+.wrap{padding-left:5vw;padding-right:5vw}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:26px 5vw;
+}
+header .logo{font-weight:500;font-size:17px;letter-spacing:-.01em}
+.burger{
+  width:34px;height:20px;position:relative;background:none;border:0;cursor:pointer;
+}
+.burger span{
+  position:absolute;left:0;right:0;height:1.5px;background:var(--ink);
+  transition:transform .45s var(--ease),top .45s var(--ease),opacity .3s;
+}
+.burger span:nth-child(1){top:4px}
+.burger span:nth-child(2){top:14px}
+body.menu-open .burger span:nth-child(1){top:9px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){top:9px;transform:rotate(-45deg)}
+
+/* ---------- menu overlay ---------- */
+.menu{
+  position:fixed;inset:0;z-index:90;background:var(--bg);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 5vw;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path .7s var(--ease);
+}
+body.menu-open .menu{clip-path:inset(0 0 0 0)}
+.menu a{
+  font-family:var(--serif);font-size:clamp(38px,7vw,76px);line-height:1.15;
+  width:fit-content;display:flex;align-items:baseline;gap:18px;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),font-style .1s;
+}
+body.menu-open .menu a{opacity:1;transform:none}
+body.menu-open .menu a:nth-child(2){transition-delay:.08s}
+body.menu-open .menu a:nth-child(3){transition-delay:.14s}
+body.menu-open .menu a:nth-child(4){transition-delay:.2s}
+body.menu-open .menu a:nth-child(5){transition-delay:.26s}
+.menu a:hover{font-style:italic}
+.menu a i{font-family:var(--sans);font-style:normal;font-size:12px;color:var(--mut)}
+.menu .m-foot{position:absolute;bottom:32px;left:5vw;right:5vw;display:flex;justify-content:space-between}
+
+/* ---------- side notes ---------- */
+.side{
+  position:fixed;top:50%;font-size:11.5px;color:var(--mut);letter-spacing:.02em;
+  z-index:50;white-space:nowrap;
+}
+.side.l{left:18px;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl}
+.side.r{right:18px;transform:translateY(-50%);writing-mode:vertical-rl}
+
+/* ---------- hero collage ---------- */
+.hero{position:relative;height:185vh}
+.statement{
+  position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;z-index:2;pointer-events:none;
+}
+.statement h1{
+  font-family:var(--serif);font-weight:400;letter-spacing:-.01em;
+  font-size:clamp(44px,7.4vw,110px);line-height:1.05;
+}
+.statement h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.statement h1 .w i{display:inline-block;font-style:normal;transform:translateY(110%);animation:up 1.1s var(--ease) forwards}
+.statement h1 .w:nth-child(2) i{animation-delay:.08s}
+.statement h1 .w:nth-child(3) i{animation-delay:.16s}
+@keyframes up{to{transform:none}}
+.statement p{margin-top:22px;font-size:15px;color:var(--ink);opacity:0;animation:fade 1s ease .7s forwards}
+@keyframes fade{to{opacity:1}}
+
+.tiles{position:absolute;inset:0;z-index:1}
+.tile{
+  position:absolute;border-radius:var(--r);overflow:hidden;
+  will-change:transform;
+}
+.tile img,.tile video{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.1s var(--ease);
+}
+.tile:hover img,.tile:hover video{transform:scale(1.04)}
+.tile figcaption{
+  position:absolute;left:0;bottom:0;right:0;padding:14px;
+  font-size:11.5px;color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,.45));
+  opacity:0;transition:opacity .5s;
+}
+.tile:hover figcaption{opacity:1}
+
+/* ---------- big serif copy blocks ---------- */
+.copy{padding:22vh 0}
+.copy .label{display:flex;gap:14px;margin-bottom:5vh}
+.copy h2,.copy p.big{
+  font-family:var(--serif);font-weight:400;letter-spacing:-.005em;
+  font-size:clamp(30px,4.4vw,62px);line-height:1.18;max-width:22ch;
+}
+.copy em{font-style:italic}
+.copy .mut{color:var(--mut)}
+.fade-line{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.fade-line.in{opacity:1;transform:none}
+
+/* ---------- work list ---------- */
+#work{padding:6vh 0 14vh}
+.w-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6vh}
+.w-list{border-top:1px solid var(--hair)}
+.w-item{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
+  padding:22px 0;border-bottom:1px solid var(--hair);
+  transition:opacity .4s;
+}
+.w-list:hover .w-item{opacity:.35}
+.w-list .w-item:hover{opacity:1}
+.w-item .t{
+  font-family:var(--serif);font-size:clamp(26px,3.6vw,48px);line-height:1.1;
+  transition:transform .5s var(--ease);
+}
+.w-item:hover .t{font-style:italic;transform:translateX(14px)}
+.w-item .meta{font-size:12.5px;color:var(--mut);text-align:right}
+.preview{
+  position:fixed;z-index:80;width:min(26vw,360px);aspect-ratio:4/3;border-radius:var(--r);
+  overflow:hidden;pointer-events:none;opacity:0;
+  transform:translate(-50%,-55%) scale(.92);
+  transition:opacity .35s,transform .6s var(--ease);
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.28);
+}
+.preview.on{opacity:1;transform:translate(-50%,-55%) scale(1)}
+.preview img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- collage band ---------- */
+.band{position:relative;height:120vh;margin:4vh 0}
+
+/* ---------- Künstlerbörse ---------- */
+#kb{padding:16vh 0}
+.kb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+.kb-grid .img{border-radius:var(--r);overflow:hidden}
+.kb-grid .img img{transition:transform 1.4s var(--ease)}
+.kb-grid .img:hover img{transform:scale(1.05)}
+#kb h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,68px);line-height:1.08;margin-bottom:3vh}
+#kb .txt p{max-width:46ch;color:#3a3a36}
+#kb .facts{display:flex;gap:44px;margin-top:5vh;padding-top:3vh;border-top:1px solid var(--hair)}
+#kb .facts b{font-family:var(--serif);font-weight:400;font-size:32px;display:block;line-height:1}
+#kb .facts span{font-size:12px;color:var(--mut)}
+.lnk{
+  display:inline-block;margin-top:5vh;font-size:14px;
+  border-bottom:1px solid var(--ink);padding-bottom:3px;
+  transition:opacity .3s;
+}
+.lnk:hover{opacity:.5}
+
+/* ---------- services ---------- */
+#services{padding:10vh 0 16vh}
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:0 6vw;max-width:980px}
+.svc div{padding:26px 0;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:baseline}
+.svc h3{font-family:var(--serif);font-weight:400;font-size:24px;white-space:nowrap}
+.svc p{font-size:13.5px;color:var(--mut)}
+
+/* ---------- footer ---------- */
+footer{padding:18vh 0 0;text-align:center}
+footer .invite{font-size:13px;color:var(--mut)}
+footer .huge{
+  display:inline-block;font-family:var(--serif);font-weight:400;
+  font-size:clamp(52px,10vw,150px);line-height:1;margin:2vh 0 10vh;
+  transition:font-style .1s,letter-spacing .8s var(--ease);
+}
+footer .huge:hover{font-style:italic;letter-spacing:.01em}
+.f-row{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  padding:26px 5vw;border-top:1px solid var(--hair);
+  font-size:12.5px;color:var(--mut);text-align:left;
+}
+.f-row .grp{display:flex;gap:28px}
+.f-row a{transition:color .3s}
+.f-row a:hover{color:var(--ink)}
+
+/* ---------- responsive ---------- */
+@media(max-width:860px){
+  .side{display:none}
+  .hero{height:150vh}
+  .statement h1{font-size:clamp(38px,10.5vw,64px)}
+  .tile{max-width:44vw}
+  .kb-grid{grid-template-columns:1fr}
+  .svc{grid-template-columns:1fr}
+  .preview{display:none}
+  .band{height:80vh}
+  .w-item .t{font-size:clamp(24px,6.6vw,34px)}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .statement h1 .w i{transform:none}
+  .statement p{opacity:1}
+  .fade-line{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top">Leo Jaerisch</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<nav class="menu" id="menu">
+  <a href="#work">Work <i>10 projects</i></a>
+  <a href="#kb">Künstlerbörse <i>founder</i></a>
+  <a href="#about">About <i>process & AI</i></a>
+  <a href="#contact">Contact <i>say hi</i></a>
+  <div class="m-foot small">
+    <span>Hamburg, Germany</span>
+    <a href="https://www.instagram.com/leo_jaerisch/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</nav>
+
+<div class="side l">&copy; 2026</div>
+<div class="side r">Made in Hamburg.</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="tiles" id="heroTiles"><!-- per JS aus TILES --></div>
+  <div class="statement">
+    <h1><span class="w"><i>Different&nbsp;</i></span><span class="w"><i>is&nbsp;</i></span><span class="w"><i>Everything.</i></span></h1>
+    <p>Art Direction, Design and Story. Made in Hamburg.</p>
+  </div>
+</section>
+
+<!-- ================= INTRO COPY ================= -->
+<section class="copy wrap" id="about">
+  <div class="label small"><span>01</span><span>About</span></div>
+  <p class="big fade-line">Hey, I'm Leo — gallerist, graphic designer and art director. I build brands, campaigns and rooms where art happens.</p>
+  <p class="big mut fade-line" style="margin-top:3vh">Curiosity, discipline, instinct — <em>and AI deep in the process.</em> More iterations, sharper ideas. The signature stays mine.</p>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work" class="wrap">
+  <div class="w-head">
+    <div class="label small" style="display:flex;gap:14px"><span>02</span><span>Selected Work</span></div>
+    <span class="small">2023 — 2026</span>
+  </div>
+  <div class="w-list" id="workList"><!-- per JS aus PROJECTS --></div>
+</section>
+
+<!-- ================= COLLAGE BAND ================= -->
+<section class="band" id="bandTiles"></section>
+
+<!-- ================= KÜNSTLERBÖRSE ================= -->
+<section id="kb" class="wrap">
+  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>03</span><span>Künstlerbörse</span></div>
+  <div class="kb-grid">
+    <div class="img">
+      <!-- später: assets/kb/hero.jpg -->
+      <img src="https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg" alt="Künstlerbörse exhibition in Hamburg, curated by Leo Jaerisch" loading="lazy">
+    </div>
+    <div class="txt">
+      <h2>Art & music,<br><em>raw and real.</em></h2>
+      <p>I founded Künstlerbörse to connect emerging artists with an audience — no gallery walls, no gatekeeping. What began as the revival of a 90s Hamburg format is now a movement: vernissages with house beats, creatives with collectors. Curation, design and communication, all from one hand.</p>
+      <div class="facts">
+        <div><b>4</b><span>editions</span></div>
+        <div><b>250+</b><span>guests per night</span></div>
+        <div><b>HH</b><span>Schanze & Villa</span></div>
+      </div>
+      <a class="lnk" href="https://www.kuenstlerboerse.net/" target="_blank" rel="noopener">Visit kuenstlerboerse.net</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="wrap">
+  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>04</span><span>What I do</span></div>
+  <div class="svc">
+    <div><h3>Art Direction</h3><p>Visual concepts, guided from first idea to final execution.</p></div>
+    <div><h3>Brand & Identity</h3><p>Attitude, translated into a clear visual language.</p></div>
+    <div><h3>Campaign</h3><p>Strong imagery meets clear messaging, across channels.</p></div>
+    <div><h3>Design Systems</h3><p>Structure and clarity that scale, digital and physical.</p></div>
+    <div><h3>Image & Motion</h3><p>Photography and motion, finished with care.</p></div>
+    <div><h3>Digital & Product</h3><p>Interfaces with hierarchy, clarity and usability.</p></div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <p class="invite">Open for freelance projects and collaborations.</p>
+  <!-- Mailadresse anpassen -->
+  <a class="huge" href="mailto:hello@leojaerisch.com">Let's talk.</a>
+  <div class="f-row">
+    <span>&copy; <span id="year"></span> Leo Jaerisch — Hamburg</span>
+    <div class="grp">
+      <a href="mailto:hello@leojaerisch.com">hello@leojaerisch.com</a>
+      <a href="https://www.instagram.com/leo_jaerisch/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.kuenstlerboerse.net/" target="_blank" rel="noopener">Künstlerbörse</a>
+      <a href="https://www.leojaerisch.com/impressum">Impressum</a>
+    </div>
+  </div>
+</footer>
+
+<div class="preview" id="preview"><img id="previewImg" src="" alt=""></div>
+
+<script>
+/* ============================================================
+   MEDIEN-KACHELN
+   type:"img" oder "video" · src später auf assets/... tauschen
+   top/left in %, w = Breite, speed = Parallax (-0.3 … 0.3)
+   ============================================================ */
+const HERO_TILES = [
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1799e785-b4ff-48c2-933f-5ab3e25b10ab/Leo_Jaerisch.jpg", cap:"Leo — Hamburg", top:6,  left:14, w:"17vw", ar:"3/4",  speed:.16},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", top:9,  left:64, w:"21vw", ar:"16/10", speed:-.1},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png", cap:"FELL — Campaign", top:34, left:6,  w:"13vw", ar:"4/5",  speed:-.14},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/c72e2bea-c415-4bde-9ca4-6b0ebc7a8946/below-06.png", cap:"below — Brand & UI", top:38, left:71, w:"19vw", ar:"16/10", speed:.12},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1413a9d0-2ba7-4857-a9bb-44f139882873/ACTIVA-02.png", cap:"ACTIVA — Campaign", top:58, left:16, w:"15vw", ar:"1/1",  speed:.2},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg", cap:"Künstlerbörse 4", top:63, left:56, w:"16vw", ar:"4/5", speed:-.08},
+  /* Video-Beispiel — mp4 einsetzen und einkommentieren:
+  {type:"video", src:"assets/reel/porsche.mp4", cap:"Porsche × EHS", top:80, left:36, w:"22vw", ar:"16/9", speed:.1}, */
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6eb94636-6d2a-4716-bc03-03b10950f9c1/FREAK-02.jpeg", cap:"FREAKS — Identity", top:82, left:34, w:"20vw", ar:"16/10", speed:.06},
+];
+const BAND_TILES = [
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/e12d24a4-cd72-4e98-a27a-38b276d36588/Float_Banking.png", cap:"Float — Campaign", top:4,  left:10, w:"15vw", ar:"4/5", speed:.14},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/3cde6da9-bd76-40eb-9cde-a6ee840dd550/Me_COPYRIGHT_TV.jpg", cap:"On set", top:14, left:44, w:"20vw", ar:"16/10", speed:-.1},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6dae63da-0004-4778-a9db-605a545da9d0/PEACELESS_FEED.png", cap:"PEACELESS", top:40, left:74, w:"14vw", ar:"4/5", speed:.18},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/961041cb-85ac-44e1-ae0f-94ee07893a2b/Bildschirmfoto+2025-11-16+um+12.02.20.png", cap:"Künstlerbörse", top:52, left:22, w:"18vw", ar:"16/11", speed:-.06},
+];
+
+/* ============================================================
+   PROJEKTE — neue Projekte: eine Zeile ergänzen.
+   img = Hover-Preview (leer lassen = kein Preview)
+   ============================================================ */
+const PROJECTS = [
+  {title:"Graphic Design",           meta:"Brand & Campaign · ongoing", href:"https://www.leojaerisch.com/start/graphic-design", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png"},
+  {title:"Künstlerbörse",            meta:"Founder & Curation · 2024–26", href:"https://www.leojaerisch.com/start/kuenstlerboerse", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg"},
+  {title:"éclat Sauvage × Klinkow",  meta:"Video · Direction", href:"https://www.leojaerisch.com/start/eclatsauvage", img:""},
+  {title:"Porsche × EHS",            meta:"Video & Photo", href:"https://www.leojaerisch.com/start/porsche", img:""},
+  {title:"Documentary",              meta:"Film", href:"https://www.leojaerisch.com/start/documentary", img:""},
+  {title:"Meraki Studios × Zoleo",   meta:"Campaign", href:"https://www.leojaerisch.com/start/zoleo", img:""},
+  {title:"Faces",                    meta:"Photography", href:"https://www.leojaerisch.com/start/faces", img:""},
+  {title:"Cold Gentleman × Klinkow", meta:"Video", href:"https://www.leojaerisch.com/start/coldgents", img:""},
+  {title:"Builders × EHS",           meta:"Photo & Documentary", href:"https://www.leojaerisch.com/start/workers", img:""},
+  {title:"Sail GP",                  meta:"Event & Photo", href:"https://www.leojaerisch.com/start/sailgp", img:""},
+];
+
+/* ---- Kacheln rendern ---- */
+function renderTiles(list, host){
+  host.innerHTML = list.map(t=>{
+    const media = t.type==="video"
+      ? `<video src="${t.src}" autoplay muted loop playsinline></video>`
+      : `<img src="${t.src}" alt="${t.cap}" loading="lazy">`;
+    return `<figure class="tile" data-speed="${t.speed}" style="top:${t.top}%;left:${t.left}%;width:${t.w};aspect-ratio:${t.ar}">${media}<figcaption>${t.cap}</figcaption></figure>`;
+  }).join('');
+}
+renderTiles(HERO_TILES, document.getElementById('heroTiles'));
+renderTiles(BAND_TILES, document.getElementById('bandTiles'));
+
+/* ---- Projektliste rendern ---- */
+document.getElementById('workList').innerHTML = PROJECTS.map(p=>`
+  <a class="w-item" href="${p.href}" data-img="${p.img}">
+    <span class="t">${p.title}</span>
+    <span class="meta">${p.meta}</span>
+  </a>`).join('');
+
+/* ---- Sanfter Parallax (gelerpt = butterweich) ---- */
+const tiles = [...document.querySelectorAll('.tile')];
+let target = scrollY, current = scrollY;
+addEventListener('scroll', ()=>{ target = scrollY }, {passive:true});
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function raf(){
+  current += (target-current)*.08;
+  if(!reduce){
+    const vh = innerHeight;
+    for(const el of tiles){
+      const r = el.getBoundingClientRect();
+      const mid = r.top + r.height/2 - vh/2;
+      el.style.transform = `translateY(${(-mid*parseFloat(el.dataset.speed)).toFixed(1)}px)`;
+    }
+  }
+  requestAnimationFrame(raf);
+})();
+
+/* ---- Hover-Preview in der Werkliste ---- */
+const pv = document.getElementById('preview'), pvImg = document.getElementById('previewImg');
+addEventListener('mousemove', e=>{
+  pv.style.left = e.clientX+'px';
+  pv.style.top = e.clientY+'px';
+});
+document.querySelectorAll('.w-item').forEach(row=>{
+  row.addEventListener('mouseenter',()=>{
+    if(!row.dataset.img) return;
+    pvImg.src = row.dataset.img;
+    pv.classList.add('on');
+  });
+  row.addEventListener('mouseleave',()=>pv.classList.remove('on'));
+});
+
+/* ---- Menü ---- */
+const burger = document.getElementById('burger');
+burger.addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
+
+/* ---- Textzeilen einblenden ---- */
+const io = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.2});
+document.querySelectorAll('.fade-line').forEach(el=>io.observe(el));
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
