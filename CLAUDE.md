@@ -37,9 +37,13 @@ Referenz: playfight.co — editorial, hell, ruhig, viel Weißraum.
 
 ## Inhalte
 
-### Showreel (Kachel in der Hero-Collage → Vollbild-Morph)
-Die Reel-Kachel (16:9) liegt von Anfang an als Teil der floating Collage unter dem Statement (HERO_TILES-Eintrag type:"anchor" = unsichtbarer Platzhalter; das fixed positionierte #reelMedia trackt dessen Rect). Beim Scrollen durch die .reel-Sektion (150vh Spacer nach dem Hero) morpht sie von der Ankerposition auf Vollbild (smoothstep, 85% Strecke Morph + 15% Verweilen), danach wird sie absolute ans Sektionsende geheftet und scrollt normal weg. prefers-reduced-motion: statische zentrierte Kachel (.reel.static).
+### Showreel (Kachel in der Hero-Collage → früher, zentrierter Vollbild-Morph)
+Die Reel-Kachel liegt von Anfang an in der floating Collage (HERO_TILES-Eintrag type:"anchor" = unsichtbarer Platzhalter; #reelMedia trackt dessen Rect). Wichtig (Leo-Feedback): sie soll FRÜH im Scroll wachsen, nicht erst nach oben scrollen. Deshalb Hero auf 110vh gekürzt → Grow startet ~0.1vh. Sie wächst ZENTRIERT (Mittelpunkt → Bildmitte, nicht mehr zur Ecke), GROW=0.5 der .reel-Strecke fürs Wachsen, Rest Verweilen, dann absolute ans Sektionsende → scrollt weg. Dabei bekommt der Hintergrund (.hero) zunehmend `blur()` (MAXBLUR 16px), damit der Fokus auf dem Reel liegt. prefers-reduced-motion: statische zentrierte Kachel (.reel.static).
+Achtung: Mobile-Media-Query setzt .hero auf 150vh → Grow startet dort später (~0.28vh), ok.
 Aktuell Platzhalter-Foto (On-Set-Portrait mit ©Thomas-Voigt-Wasserzeichen!) — sobald Leos Showreel-mp4 da ist: nach `assets/reel/showreel.mp4`, video-Tag ist auskommentiert vorbereitet. Wasserzeichen-Bild vor Launch ersetzen.
+
+### Floating-Kacheln
+Statement-Text liegt HINTER den Kacheln (.statement z-index:1, .tiles z-index:2). Kachel-Seitenverhältnis wird per JS (fitAspect in renderTiles) an das native Bildformat gekoppelt — das `ar` im TILES-Array ist nur noch Startwert gegen Layout-Sprung.
 
 ### Statement / Intro
 "Different is Everything." — danach kurzer About-Block in großer Serife:
