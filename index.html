@@ -136,6 +136,23 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 }
 .tile:hover figcaption{opacity:1}
 
+/* ---------- showreel ---------- */
+.reel{position:relative;height:260vh}
+.reel .sticky{
+  position:sticky;top:0;height:100vh;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.reel .media{
+  position:relative;width:62vw;aspect-ratio:16/9;border-radius:var(--r);
+  overflow:hidden;will-change:width,height;
+}
+.reel .media img,.reel .media video{width:100%;height:100%;object-fit:cover;display:block}
+.reel .tag{
+  position:absolute;left:26px;bottom:22px;color:#fff;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  text-shadow:0 1px 12px rgba(0,0,0,.35);
+}
+
 /* ---------- big serif copy blocks ---------- */
 .copy{padding-top:20vh;padding-bottom:20vh}
 .copy .label{display:flex;gap:14px;margin-bottom:5vh}
@@ -192,9 +209,12 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 .fd .facts{display:flex;gap:40px;margin-top:4vh}
 .fd .facts b{font-weight:600;font-size:22px;display:block;line-height:1;letter-spacing:-.01em}
 .fd .facts span{font-size:12px;color:var(--mut)}
-.fd .img{border-radius:var(--r);overflow:hidden}
-.fd .img img{transition:transform 1.4s var(--ease)}
+.fd .img{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;will-change:transform}
+.fd .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
 .fd .img:hover img{transform:scale(1.05)}
+.fd-item:nth-child(2){grid-template-columns:.85fr 1.15fr}
+.fd-item:nth-child(2) .img{order:-1;max-width:440px;aspect-ratio:4/5;margin-top:5vh}
+.fd-item:nth-child(2) .txt{max-width:52ch;justify-self:end;margin-top:10vh}
 .lnk{
   display:inline-block;margin-top:5vh;font-size:14px;
   border-bottom:1px solid var(--ink);padding-bottom:3px;
@@ -256,7 +276,11 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
   .hero{height:150vh}
   .statement h1{font-size:clamp(38px,10.5vw,64px)}
   .tile{max-width:44vw}
-  .fd-item{grid-template-columns:1fr}
+  .fd-item,.fd-item:nth-child(2){grid-template-columns:1fr}
+  .fd-item:nth-child(2) .txt{justify-self:start;margin-top:0}
+  .fd-item:nth-child(2) .img{margin-top:0}
+  .reel{height:200vh}
+  .reel .media{width:86vw}
   .svc{grid-template-columns:1fr}
   .preview{display:none}
   .band{height:80vh}
@@ -302,6 +326,18 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
   </div>
 </section>
 
+<!-- ================= SHOWREEL (wächst beim Scrollen auf Vollbild) ================= -->
+<section class="reel" id="reel">
+  <div class="sticky">
+    <div class="media">
+      <!-- Showreel: sobald es das mp4 gibt, img durch video ersetzen:
+      <video src="assets/reel/showreel.mp4" autoplay muted loop playsinline poster="assets/reel/poster.jpg"></video> -->
+      <img src="https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/3cde6da9-bd76-40eb-9cde-a6ee840dd550/Me_COPYRIGHT_TV.jpg" alt="Leo Jaerisch on set — showreel preview" loading="lazy">
+      <span class="tag">Showreel — 2026</span>
+    </div>
+  </div>
+</section>
+
 <!-- ================= INTRO COPY ================= -->
 <section class="copy wrap" id="about">
   <div class="label small"><span>01</span><span>About</span></div>
@@ -337,7 +373,7 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
         </div>
         <a class="lnk" href="https://www.kuenstlerboerse.net/" target="_blank" rel="noopener">Visit kuenstlerboerse.net</a>
       </div>
-      <div class="img">
+      <div class="img" data-speed=".05">
         <!-- später: assets/kb/hero.jpg -->
         <img src="https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg" alt="Künstlerbörse exhibition in Hamburg, curated by Leo Jaerisch" loading="lazy">
       </div>
@@ -348,6 +384,10 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
         <div class="role">Co-Founder</div>
         <p class="desc">Visual communication for <em>architecture and space.</em> Photography and film that place buildings in their spatial and cultural context — from residential projects to co-working spaces. Based in Hamburg.</p>
         <a class="lnk" href="https://www.zoleo-hamburg.com/" target="_blank" rel="noopener">Visit zoleo-hamburg.com</a>
+      </div>
+      <div class="img" data-speed="-.04">
+        <!-- später: assets/work/zoleo.jpg -->
+        <img src="https://images.squarespace-cdn.com/content/v1/6732213c52050d7b30ef48d0/52745ac1-6ef4-4e79-bb06-e5a6e740d231/Leo_Jaerisch_ZOLEO-33.jpg?format=1500w" alt="Architecture photography by Zoleo — black timber house" loading="lazy">
       </div>
     </div>
   </div>
@@ -474,10 +514,25 @@ document.getElementById('workList').innerHTML = PROJECTS.map(p=>`
   </a>`).join('');
 
 /* ---- Sanfter Parallax (gelerpt = butterweich) ---- */
-const tiles = [...document.querySelectorAll('.tile')];
+const tiles = [...document.querySelectorAll('[data-speed]')];
 let target = scrollY, current = scrollY;
 addEventListener('scroll', ()=>{ target = scrollY }, {passive:true});
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- Showreel: wächst beim Scrollen von quer auf Vollbild ---- */
+const reelSec = document.querySelector('.reel');
+const reelMedia = document.querySelector('.reel .media');
+function updateReel(){
+  const r = reelSec.getBoundingClientRect();
+  const vw = innerWidth, vh = innerHeight;
+  let p = Math.min(1, Math.max(0, -r.top / (r.height - vh)));
+  p = p*p*(3-2*p); /* smoothstep — startet und endet weich */
+  const w0 = vw*(vw<860 ? .86 : .62), h0 = w0*9/16;
+  reelMedia.style.width  = (w0 + (vw-w0)*p).toFixed(1)+'px';
+  reelMedia.style.height = (h0 + (vh-h0)*p).toFixed(1)+'px';
+  reelMedia.style.borderRadius = ((1-p)*10).toFixed(1)+'px';
+}
+
 (function raf(){
   current += (target-current)*.08;
   if(!reduce){
@@ -487,6 +542,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const mid = r.top + r.height/2 - vh/2;
       el.style.transform = `translateY(${(-mid*parseFloat(el.dataset.speed)).toFixed(1)}px)`;
     }
+    updateReel();
   }
   requestAnimationFrame(raf);
 })();

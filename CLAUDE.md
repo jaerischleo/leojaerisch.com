@@ -37,6 +37,9 @@ Referenz: playfight.co — editorial, hell, ruhig, viel Weißraum.
 
 ## Inhalte
 
+### Showreel (Sektion direkt nach dem Hero)
+Quer liegende Media-Kachel (16:9), die beim Scrollen weich auf Vollbild aufzieht (sticky + smoothstep, im rAF-Loop). Aktuell Platzhalter-Foto (On-Set-Portrait mit ©Thomas-Voigt-Wasserzeichen!) — sobald Leos Showreel-mp4 da ist: nach `assets/reel/showreel.mp4`, im HTML ist der video-Tag auskommentiert vorbereitet. Wasserzeichen-Bild vor Launch ersetzen.
+
 ### Statement / Intro
 "Different is Everything." — danach kurzer About-Block in großer Serife:
 Galerist, Grafikdesigner, Art Director. Baut Marken, Kampagnen und Räume, in denen Kunst stattfindet.
@@ -59,7 +62,8 @@ Hinweis auf der Seite nötig: Mit *EHS* markierte Arbeiten entstanden im Rahmen 
 ### Founded (Sektion 03 — ersetzt die reine Künstlerbörse-Sektion)
 Zwei Einträge:
 1. Künstlerbörse — Founder & Curator, 2024–26. Plattform für junge Künstler:innen, Revival eines Hamburger 90er-Formats. "Art & music, raw and real." Fakten: 4 Editionen · 250+ Gäste pro Vernissage · Locations: Cramer Wohnvilla & Schanzenhöfe. Link: kuenstlerboerse.net
-2. Zoleo — Co-Founder. TODO: Beschreibung (1–2 Sätze) von Leo einholen, steht noch nicht auf der Seite.
+2. Zoleo — Co-Founder. "Visual communication for architecture and space" (zoleo-hamburg.com). Bild: schwarzes Blockhaus (Leo_Jaerisch_ZOLEO-33.jpg vom Zoleo-Squarespace-CDN).
+Layout bewusst asymmetrisch/dynamisch: KB Text links + Bild rechts (4/3), Zoleo Bild links schmaler (4/5, max 440px) + Text rechts versetzt; beide Bilder haben leichtes Parallax via data-speed.
 
 ### Services (kompakt, keine Cards)
 Art Direction · Brand & Identity · Campaign & Communication · Design Systems · Image & Motion · Digital & Product
