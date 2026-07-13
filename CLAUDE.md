@@ -15,7 +15,10 @@ Ton: selbstbewusst, reduziert, nicht cringe, nicht nach KI klingend. Wenig Text.
 Referenz: playfight.co — editorial, hell, ruhig, viel Weißraum.
 
 - Grundfarbe Weiß/Off-White (#FCFCFA), Schrift Schwarz. Keine Akzentfarben, kein Neon.
-- Serifenschrift für alles Große (aktuell: Instrument Serif). Neutrale Grotesk (Hanken Grotesk) nur für Kleines: Meta, Captions, Navigation.
+- Hanken Grotesk führt (Leo-Entscheidung Juli 2026): saubere Grotesk für fast alles. Serife (Instrument Serif) NUR als seltener Akzent — Hero-Statement "Different is Everything.", kursive em-Einschübe, Footer "Let's talk.".
+- Großzügige Seitenränder (--mx: clamp(28px,8vw,120px)). Achtung: padding-Kurzform in Sektionen überschreibt .wrap — immer padding-top/-bottom einzeln setzen.
+- Schriftgrößen moderat halten, nichts Riesiges außer dem Hero-Statement.
+- Werkliste & Formular sitzen rechts versetzt (width min(720px,62%), margin-left:auto) — bewusste Asymmetrie.
 - Einstieg: zentriertes Serifen-Statement **"Different is Everything."** + kleine Subline. Das ist die Kernaussage der Seite.
 - Um das Statement: verstreute Medien-Kacheln (Bilder UND Videos) in unterschiedlichen Größen, leicht gerundete Ecken.
 - Scroll: weicher, gelerpter Parallax — Kacheln bewegen sich mit unterschiedlichen Geschwindigkeiten. Butterweich, nie ruckartig.
@@ -53,19 +56,22 @@ AI-Satz (wichtig, aber unaufgeregt): "AI deep in the process. More iterations, s
 
 Hinweis auf der Seite nötig: Mit *EHS* markierte Arbeiten entstanden im Rahmen der Anstellung bei EHS Media (ehsmedia.de).
 
-### Künstlerbörse (große eigene Sektion — wichtigste Referenz)
-Plattform für junge Künstler:innen, gegründet von Leo. Revival eines Hamburger 90er-Formats.
-"Art & music, raw and real." Kuration, Organisation, Design, Kommunikation aus einer Hand.
-Fakten: 4 Editionen · 250+ Gäste pro Vernissage · Locations: Cramer Wohnvilla & Schanzenhöfe.
-Link: kuenstlerboerse.net
+### Founded (Sektion 03 — ersetzt die reine Künstlerbörse-Sektion)
+Zwei Einträge:
+1. Künstlerbörse — Founder & Curator, 2024–26. Plattform für junge Künstler:innen, Revival eines Hamburger 90er-Formats. "Art & music, raw and real." Fakten: 4 Editionen · 250+ Gäste pro Vernissage · Locations: Cramer Wohnvilla & Schanzenhöfe. Link: kuenstlerboerse.net
+2. Zoleo — Co-Founder. TODO: Beschreibung (1–2 Sätze) von Leo einholen, steht noch nicht auf der Seite.
 
 ### Services (kompakt, keine Cards)
 Art Direction · Brand & Identity · Campaign & Communication · Design Systems · Image & Motion · Digital & Product
 
+### Inquiry-Formular (Sektion 05, vor dem Footer)
+Name / Email / Project (Textarea), versendet über FormSubmit (formsubmit.co) an jaerisch.leo@gmail.com.
+Wichtig: Beim ERSTEN echten Submit schickt FormSubmit eine Aktivierungsmail an Leos Adresse — einmal bestätigen, dann läuft es. _captcha=false, Honeypot-Feld gegen Spam.
+
 ### Footer
 Einladung ("Open for freelance projects and collaborations."), großes "Let's talk." (mailto),
 E-Mail, Instagram (instagram.com/leo_jaerisch), Künstlerbörse-Link, Impressum, ©-Zeile.
-E-Mail-Adresse: PLATZHALTER hello@leojaerisch.com — vor Launch durch echte Adresse ersetzen.
+E-Mail-Adresse überall: jaerisch.leo@gmail.com.
 
 ## Technik & Struktur
 

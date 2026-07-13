@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://www.leojaerisch.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Leo Jaerisch","jobTitle":"Art Director & Graphic Designer","address":{"@type":"PostalAddress","addressLocality":"Hamburg","addressCountry":"DE"},"url":"https://www.leojaerisch.com","sameAs":["https://www.instagram.com/leo_jaerisch/","https://www.kuenstlerboerse.net/"]}
 </script>
@@ -30,6 +30,7 @@
   --serif:'Instrument Serif',serif;
   --sans:'Hanken Grotesk',sans-serif;
   --r:10px;
+  --mx:clamp(28px,8vw,120px);
   --ease:cubic-bezier(.19,1,.22,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -45,13 +46,13 @@ img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .serif{font-family:var(--serif);font-weight:400}
 .small{font-size:12.5px;letter-spacing:.01em;color:var(--mut)}
-.wrap{padding-left:5vw;padding-right:5vw}
+.wrap{padding-left:var(--mx);padding-right:var(--mx)}
 
 /* ---------- header ---------- */
 header{
   position:fixed;inset:0 0 auto 0;z-index:100;
   display:flex;justify-content:space-between;align-items:center;
-  padding:26px 5vw;
+  padding:26px var(--mx);
 }
 header .logo{font-weight:500;font-size:17px;letter-spacing:-.01em}
 .burger{
@@ -70,13 +71,13 @@ body.menu-open .burger span:nth-child(2){top:9px;transform:rotate(-45deg)}
 .menu{
   position:fixed;inset:0;z-index:90;background:var(--bg);
   display:flex;flex-direction:column;justify-content:center;
-  padding:0 5vw;
+  padding:0 var(--mx);
   clip-path:inset(0 0 100% 0);
   transition:clip-path .7s var(--ease);
 }
 body.menu-open .menu{clip-path:inset(0 0 0 0)}
 .menu a{
-  font-family:var(--serif);font-size:clamp(38px,7vw,76px);line-height:1.15;
+  font-weight:500;letter-spacing:-.02em;font-size:clamp(30px,5vw,54px);line-height:1.2;
   width:fit-content;display:flex;align-items:baseline;gap:18px;
   opacity:0;transform:translateY(20px);
   transition:opacity .5s var(--ease),transform .5s var(--ease),font-style .1s;
@@ -86,9 +87,9 @@ body.menu-open .menu a:nth-child(2){transition-delay:.08s}
 body.menu-open .menu a:nth-child(3){transition-delay:.14s}
 body.menu-open .menu a:nth-child(4){transition-delay:.2s}
 body.menu-open .menu a:nth-child(5){transition-delay:.26s}
-.menu a:hover{font-style:italic}
+.menu a:hover{color:var(--mut)}
 .menu a i{font-family:var(--sans);font-style:normal;font-size:12px;color:var(--mut)}
-.menu .m-foot{position:absolute;bottom:32px;left:5vw;right:5vw;display:flex;justify-content:space-between}
+.menu .m-foot{position:absolute;bottom:32px;left:var(--mx);right:var(--mx);display:flex;justify-content:space-between}
 
 /* ---------- side notes ---------- */
 .side{
@@ -136,33 +137,33 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 .tile:hover figcaption{opacity:1}
 
 /* ---------- big serif copy blocks ---------- */
-.copy{padding:22vh 0}
+.copy{padding-top:20vh;padding-bottom:20vh}
 .copy .label{display:flex;gap:14px;margin-bottom:5vh}
 .copy h2,.copy p.big{
-  font-family:var(--serif);font-weight:400;letter-spacing:-.005em;
-  font-size:clamp(30px,4.4vw,62px);line-height:1.18;max-width:22ch;
+  font-weight:400;letter-spacing:-.01em;
+  font-size:clamp(20px,2.4vw,36px);line-height:1.4;max-width:32ch;
 }
-.copy em{font-style:italic}
+.copy em{font-family:var(--serif);font-style:italic;font-size:1.08em}
 .copy .mut{color:var(--mut)}
 .fade-line{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 .fade-line.in{opacity:1;transform:none}
 
 /* ---------- work list ---------- */
-#work{padding:6vh 0 14vh}
+#work{padding-top:6vh;padding-bottom:14vh}
 .w-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6vh}
-.w-list{border-top:1px solid var(--hair)}
+.w-list{border-top:1px solid var(--hair);margin-left:auto;width:min(720px,62%)}
 .w-item{
   display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
-  padding:22px 0;border-bottom:1px solid var(--hair);
+  padding:18px 0;border-bottom:1px solid var(--hair);
   transition:opacity .4s;
 }
 .w-list:hover .w-item{opacity:.35}
 .w-list .w-item:hover{opacity:1}
 .w-item .t{
-  font-family:var(--serif);font-size:clamp(26px,3.6vw,48px);line-height:1.1;
+  font-size:16px;font-weight:500;letter-spacing:.01em;line-height:1.3;
   transition:transform .5s var(--ease);
 }
-.w-item:hover .t{font-style:italic;transform:translateX(14px)}
+.w-item:hover .t{transform:translateX(10px)}
 .w-item .meta{font-size:12.5px;color:var(--mut);text-align:right}
 .preview{
   position:fixed;z-index:80;width:min(26vw,360px);aspect-ratio:4/3;border-radius:var(--r);
@@ -177,17 +178,23 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 /* ---------- collage band ---------- */
 .band{position:relative;height:120vh;margin:4vh 0}
 
-/* ---------- Künstlerbörse ---------- */
-#kb{padding:16vh 0}
-.kb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
-.kb-grid .img{border-radius:var(--r);overflow:hidden}
-.kb-grid .img img{transition:transform 1.4s var(--ease)}
-.kb-grid .img:hover img{transform:scale(1.05)}
-#kb h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,68px);line-height:1.08;margin-bottom:3vh}
-#kb .txt p{max-width:46ch;color:#3a3a36}
-#kb .facts{display:flex;gap:44px;margin-top:5vh;padding-top:3vh;border-top:1px solid var(--hair)}
-#kb .facts b{font-family:var(--serif);font-weight:400;font-size:32px;display:block;line-height:1}
-#kb .facts span{font-size:12px;color:var(--mut)}
+/* ---------- founded ---------- */
+#founded{padding-top:14vh;padding-bottom:10vh}
+.fd{border-top:1px solid var(--hair)}
+.fd-item{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:6vw;align-items:start;
+  padding:7vh 0;border-bottom:1px solid var(--hair);
+}
+.fd-item h3{font-size:clamp(24px,2.6vw,38px);font-weight:500;letter-spacing:-.02em;line-height:1.1}
+.fd-item .role{font-size:12.5px;color:var(--mut);margin-top:10px}
+.fd-item .desc{margin-top:3.5vh;max-width:44ch;color:#3a3a36;font-size:15px}
+.fd-item .desc em{font-family:var(--serif);font-style:italic;font-size:1.1em}
+.fd .facts{display:flex;gap:40px;margin-top:4vh}
+.fd .facts b{font-weight:600;font-size:22px;display:block;line-height:1;letter-spacing:-.01em}
+.fd .facts span{font-size:12px;color:var(--mut)}
+.fd .img{border-radius:var(--r);overflow:hidden}
+.fd .img img{transition:transform 1.4s var(--ease)}
+.fd .img:hover img{transform:scale(1.05)}
 .lnk{
   display:inline-block;margin-top:5vh;font-size:14px;
   border-bottom:1px solid var(--ink);padding-bottom:3px;
@@ -196,24 +203,47 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 .lnk:hover{opacity:.5}
 
 /* ---------- services ---------- */
-#services{padding:10vh 0 16vh}
+#services{padding-top:10vh;padding-bottom:16vh}
 .svc{display:grid;grid-template-columns:repeat(2,1fr);gap:0 6vw;max-width:980px}
 .svc div{padding:26px 0;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:baseline}
-.svc h3{font-family:var(--serif);font-weight:400;font-size:24px;white-space:nowrap}
+.svc h3{font-weight:500;font-size:16px;letter-spacing:.01em;white-space:nowrap}
 .svc p{font-size:13.5px;color:var(--mut)}
 
+/* ---------- inquiry form ---------- */
+#inquiry{padding-top:6vh;padding-bottom:14vh}
+.form{margin-left:auto;width:min(720px,62%)}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+.field{margin-top:36px}
+.field label{display:block;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.field input,.field textarea{
+  width:100%;background:none;border:0;border-bottom:1px solid var(--hair);
+  padding:10px 0 12px;font:inherit;font-size:16px;color:var(--ink);
+  outline:none;border-radius:0;resize:vertical;
+  transition:border-color .35s;
+}
+.field input:focus,.field textarea:focus{border-color:var(--ink)}
+.field ::placeholder{color:var(--mut);opacity:.6}
+.form button{
+  margin-top:44px;background:none;border:1px solid var(--ink);border-radius:999px;
+  padding:14px 36px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer;
+  transition:background .35s var(--ease),color .35s var(--ease);
+}
+.form button:hover{background:var(--ink);color:var(--bg)}
+.form .alt{margin-top:22px;font-size:12.5px;color:var(--mut)}
+.form .alt a{border-bottom:1px solid var(--hair);padding-bottom:2px}
+
 /* ---------- footer ---------- */
-footer{padding:18vh 0 0;text-align:center}
+footer{padding:14vh 0 0;text-align:center}
 footer .invite{font-size:13px;color:var(--mut)}
 footer .huge{
   display:inline-block;font-family:var(--serif);font-weight:400;
-  font-size:clamp(52px,10vw,150px);line-height:1;margin:2vh 0 10vh;
+  font-size:clamp(44px,8vw,110px);line-height:1;margin:2vh 0 9vh;
   transition:font-style .1s,letter-spacing .8s var(--ease);
 }
 footer .huge:hover{font-style:italic;letter-spacing:.01em}
 .f-row{
   display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
-  padding:26px 5vw;border-top:1px solid var(--hair);
+  padding:26px var(--mx);border-top:1px solid var(--hair);
   font-size:12.5px;color:var(--mut);text-align:left;
 }
 .f-row .grp{display:flex;gap:28px}
@@ -226,11 +256,13 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
   .hero{height:150vh}
   .statement h1{font-size:clamp(38px,10.5vw,64px)}
   .tile{max-width:44vw}
-  .kb-grid{grid-template-columns:1fr}
+  .fd-item{grid-template-columns:1fr}
   .svc{grid-template-columns:1fr}
   .preview{display:none}
   .band{height:80vh}
-  .w-item .t{font-size:clamp(24px,6.6vw,34px)}
+  .w-list{width:100%}
+  .form{width:100%}
+  .form .row{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -249,9 +281,9 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
 
 <nav class="menu" id="menu">
   <a href="#work">Work <i>10 projects</i></a>
-  <a href="#kb">Künstlerbörse <i>founder</i></a>
+  <a href="#founded">Founded <i>Künstlerbörse · Zoleo</i></a>
   <a href="#about">About <i>process & AI</i></a>
-  <a href="#contact">Contact <i>say hi</i></a>
+  <a href="#inquiry">Contact <i>say hi</i></a>
   <div class="m-foot small">
     <span>Hamburg, Germany</span>
     <a href="https://www.instagram.com/leo_jaerisch/" target="_blank" rel="noopener">Instagram</a>
@@ -289,23 +321,33 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
 <!-- ================= COLLAGE BAND ================= -->
 <section class="band" id="bandTiles"></section>
 
-<!-- ================= KÜNSTLERBÖRSE ================= -->
-<section id="kb" class="wrap">
-  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>03</span><span>Künstlerbörse</span></div>
-  <div class="kb-grid">
-    <div class="img">
-      <!-- später: assets/kb/hero.jpg -->
-      <img src="https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg" alt="Künstlerbörse exhibition in Hamburg, curated by Leo Jaerisch" loading="lazy">
-    </div>
-    <div class="txt">
-      <h2>Art & music,<br><em>raw and real.</em></h2>
-      <p>I founded Künstlerbörse to connect emerging artists with an audience — no gallery walls, no gatekeeping. What began as the revival of a 90s Hamburg format is now a movement: vernissages with house beats, creatives with collectors. Curation, design and communication, all from one hand.</p>
-      <div class="facts">
-        <div><b>4</b><span>editions</span></div>
-        <div><b>250+</b><span>guests per night</span></div>
-        <div><b>HH</b><span>Schanze & Villa</span></div>
+<!-- ================= FOUNDED ================= -->
+<section id="founded" class="wrap">
+  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>03</span><span>Founded</span></div>
+  <div class="fd">
+    <div class="fd-item">
+      <div class="txt">
+        <h3>Künstlerbörse</h3>
+        <div class="role">Founder & Curator · 2024–26</div>
+        <p class="desc">A platform for emerging artists — <em>art & music, raw and real.</em> Revival of a 90s Hamburg format: vernissages with house beats, creatives with collectors. Curation, design and communication, all from one hand.</p>
+        <div class="facts">
+          <div><b>4</b><span>editions</span></div>
+          <div><b>250+</b><span>guests per night</span></div>
+          <div><b>HH</b><span>Schanze & Villa</span></div>
+        </div>
+        <a class="lnk" href="https://www.kuenstlerboerse.net/" target="_blank" rel="noopener">Visit kuenstlerboerse.net</a>
       </div>
-      <a class="lnk" href="https://www.kuenstlerboerse.net/" target="_blank" rel="noopener">Visit kuenstlerboerse.net</a>
+      <div class="img">
+        <!-- später: assets/kb/hero.jpg -->
+        <img src="https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg" alt="Künstlerbörse exhibition in Hamburg, curated by Leo Jaerisch" loading="lazy">
+      </div>
+    </div>
+    <div class="fd-item">
+      <div class="txt">
+        <h3>Zoleo</h3>
+        <div class="role">Co-Founder</div>
+        <!-- TODO: 1–2 Sätze von Leo zu Zoleo ergänzen -->
+      </div>
     </div>
   </div>
 </section>
@@ -323,15 +365,44 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
   </div>
 </section>
 
+<!-- ================= INQUIRY ================= -->
+<section id="inquiry" class="wrap">
+  <div class="w-head">
+    <div class="label small" style="display:flex;gap:14px"><span>05</span><span>Inquiry</span></div>
+    <span class="small">Usually replies within 48h</span>
+  </div>
+  <form class="form" action="https://formsubmit.co/jaerisch.leo@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="New inquiry — leojaerisch.com">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="row">
+      <div class="field">
+        <label for="f-name">Name</label>
+        <input id="f-name" name="name" type="text" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="f-mail">Email</label>
+        <input id="f-mail" name="email" type="email" required autocomplete="email">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-msg">Project</label>
+      <textarea id="f-msg" name="message" rows="4" required placeholder="What are we making?"></textarea>
+    </div>
+    <button type="submit">Send inquiry</button>
+    <p class="alt">Or write directly: <a href="mailto:jaerisch.leo@gmail.com">jaerisch.leo@gmail.com</a></p>
+  </form>
+</section>
+
 <!-- ================= FOOTER ================= -->
 <footer id="contact">
   <p class="invite">Open for freelance projects and collaborations.</p>
-  <!-- Mailadresse anpassen -->
-  <a class="huge" href="mailto:hello@leojaerisch.com">Let's talk.</a>
+  <a class="huge" href="mailto:jaerisch.leo@gmail.com">Let's talk.</a>
   <div class="f-row">
     <span>&copy; <span id="year"></span> Leo Jaerisch — Hamburg</span>
     <div class="grp">
-      <a href="mailto:hello@leojaerisch.com">hello@leojaerisch.com</a>
+      <a href="mailto:jaerisch.leo@gmail.com">jaerisch.leo@gmail.com</a>
       <a href="https://www.instagram.com/leo_jaerisch/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.kuenstlerboerse.net/" target="_blank" rel="noopener">Künstlerbörse</a>
       <a href="https://www.leojaerisch.com/impressum">Impressum</a>
