@@ -100,7 +100,7 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 .side.r{right:18px;transform:translateY(-50%);writing-mode:vertical-rl}
 
 /* ---------- hero collage ---------- */
-.hero{position:relative;height:110vh;will-change:filter}
+.hero{position:relative;height:170vh;will-change:filter}
 .statement{
   position:sticky;top:0;height:100vh;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
@@ -139,7 +139,7 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 /* ---------- showreel ----------
    Startet als kleine Kachel in der Hero-Collage (.reel-anchor = unsichtbarer
    Platzhalter dort) und wächst beim Scrollen auf Vollbild. */
-.reel{position:relative;height:150vh}
+.reel{position:relative;height:130vh}
 .reel-anchor{visibility:hidden}
 .reel-media{
   position:fixed;left:0;top:0;z-index:5;overflow:hidden;border-radius:var(--r);
@@ -459,16 +459,16 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
    top/left in %, w = Breite, speed = Parallax (-0.3 … 0.3)
    ============================================================ */
 const HERO_TILES = [
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1799e785-b4ff-48c2-933f-5ab3e25b10ab/Leo_Jaerisch.jpg", cap:"Leo — Hamburg", top:6,  left:14, w:"17vw", ar:"3/4",  speed:.16},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", top:9,  left:64, w:"21vw", ar:"16/10", speed:-.1},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png", cap:"FELL — Campaign", top:34, left:6,  w:"13vw", ar:"4/5",  speed:-.14},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/c72e2bea-c415-4bde-9ca4-6b0ebc7a8946/below-06.png", cap:"below — Brand & UI", top:38, left:71, w:"19vw", ar:"16/10", speed:.12},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1413a9d0-2ba7-4857-a9bb-44f139882873/ACTIVA-02.png", cap:"ACTIVA — Campaign", top:58, left:16, w:"15vw", ar:"1/1",  speed:.2},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg", cap:"Künstlerbörse 4", top:63, left:56, w:"16vw", ar:"4/5", speed:-.08},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1799e785-b4ff-48c2-933f-5ab3e25b10ab/Leo_Jaerisch.jpg", cap:"Leo — Hamburg", top:4,  left:17, w:"14vw", speed:.16},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", top:6,  left:66, w:"18vw", speed:-.1},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png", cap:"FELL — Campaign", top:29, left:4,  w:"11vw", speed:-.14},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/c72e2bea-c415-4bde-9ca4-6b0ebc7a8946/below-06.png", cap:"below — Brand & UI", top:25, left:75, w:"16vw", speed:.12},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1413a9d0-2ba7-4857-a9bb-44f139882873/ACTIVA-02.png", cap:"ACTIVA — Campaign", top:58, left:9, w:"14vw", speed:.2},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg", cap:"Künstlerbörse 4", top:63, left:64, w:"15vw", speed:-.08},
   /* Ankerplatz fürs Showreel — hier "liegt" die Reel-Kachel in der Collage,
      bevor sie beim Scrollen auf Vollbild wächst (Position/Größe hier tunen): */
-  {type:"anchor", top:42, left:37, w:"26vw", ar:"16/9", speed:0},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6eb94636-6d2a-4716-bc03-03b10950f9c1/FREAK-02.jpeg", cap:"FREAKS — Identity", top:86, left:70, w:"16vw", ar:"16/10", speed:.06},
+  {type:"anchor", top:36, left:38, w:"24vw", ar:"16/9", speed:0},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6eb94636-6d2a-4716-bc03-03b10950f9c1/FREAK-02.jpeg", cap:"FREAKS — Identity", top:85, left:66, w:"14vw", speed:.06},
 ];
 const BAND_TILES = [
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/e12d24a4-cd72-4e98-a27a-38b276d36588/Float_Banking.png", cap:"Float — Campaign", top:4,  left:10, w:"15vw", ar:"4/5", speed:.14},
@@ -503,8 +503,8 @@ function renderTiles(list, host){
       : `<img src="${t.src}" alt="${t.cap}" loading="lazy">`;
     const cls = t.type==="anchor" ? "tile reel-anchor" : "tile";
     const cap = t.cap ? `<figcaption>${t.cap}</figcaption>` : "";
-    /* ar = Startwert gegen Layout-Sprung; echtes Bildformat kommt per fitAspect */
-    return `<figure class="${cls}" data-speed="${t.speed}" style="top:${t.top}%;left:${t.left}%;width:${t.w};aspect-ratio:${t.ar}">${media}${cap}</figure>`;
+    /* ar nur Fallback gegen Layout-Sprung; echtes Bildformat kommt per fitAspect */
+    return `<figure class="${cls}" data-speed="${t.speed}" style="top:${t.top}%;left:${t.left}%;width:${t.w};aspect-ratio:${t.ar||'1/1'}">${media}${cap}</figure>`;
   }).join('');
   /* Kachelformat an das native Seitenverhältnis des Bildes anpassen */
   host.querySelectorAll('.tile img').forEach(img=>{
@@ -537,16 +537,21 @@ const reelSec = document.querySelector('.reel');
 const reelMedia = document.getElementById('reelMedia');
 const reelAnchor = document.querySelector('.reel-anchor');
 const heroEl = document.querySelector('.hero');
-const GROW = 0.5, MAXBLUR = 16;
+const MAXBLUR = 16;
 if(reduce) reelSec.classList.add('static');
 function updateReel(){
   if(reduce) return;
   const vw = innerWidth, vh = innerHeight;
-  const raw = (scrollY - (reelSec.offsetTop - vh)) / reelSec.offsetHeight;
-  let p = Math.min(1, Math.max(0, raw / GROW));
+  /* Wachstum früh + unabhängig von der Hero-Höhe (fixe Viewport-Anteile,
+     damit es auf Desktop wie Mobile gleich früh startet):
+     startet nach 0.2 Viewports Scroll, Vollbild nach weiteren ~0.95. */
+  const growStartY = vh*0.2;
+  const growLen    = vh*0.95;
+  const pinY       = reelSec.offsetTop + reelSec.offsetHeight - vh;
+  let p = Math.min(1, Math.max(0, (scrollY - growStartY) / growLen));
   p = p*p*(3-2*p); /* smoothstep — startet und endet weich */
   heroEl.style.filter = p>0 ? `blur(${(p*MAXBLUR).toFixed(1)}px)` : '';
-  if(raw >= 1){
+  if(scrollY >= pinY){
     /* Vollbild vorbei — ans Ende der Reel-Sektion heften, scrollt mit */
     reelMedia.style.position = 'absolute';
     reelMedia.style.left = '0px';

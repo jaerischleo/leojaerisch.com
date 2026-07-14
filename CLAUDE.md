@@ -38,12 +38,11 @@ Referenz: playfight.co — editorial, hell, ruhig, viel Weißraum.
 ## Inhalte
 
 ### Showreel (Kachel in der Hero-Collage → früher, zentrierter Vollbild-Morph)
-Die Reel-Kachel liegt von Anfang an in der floating Collage (HERO_TILES-Eintrag type:"anchor" = unsichtbarer Platzhalter; #reelMedia trackt dessen Rect). Wichtig (Leo-Feedback): sie soll FRÜH im Scroll wachsen, nicht erst nach oben scrollen. Deshalb Hero auf 110vh gekürzt → Grow startet ~0.1vh. Sie wächst ZENTRIERT (Mittelpunkt → Bildmitte, nicht mehr zur Ecke), GROW=0.5 der .reel-Strecke fürs Wachsen, Rest Verweilen, dann absolute ans Sektionsende → scrollt weg. Dabei bekommt der Hintergrund (.hero) zunehmend `blur()` (MAXBLUR 16px), damit der Fokus auf dem Reel liegt. prefers-reduced-motion: statische zentrierte Kachel (.reel.static).
-Achtung: Mobile-Media-Query setzt .hero auf 150vh → Grow startet dort später (~0.28vh), ok.
+Die Reel-Kachel liegt von Anfang an in der floating Collage (HERO_TILES-Eintrag type:"anchor" = unsichtbarer Platzhalter; #reelMedia trackt dessen Rect). Sie wächst FRÜH (updateReel: growStartY = vh*0.2, growLen = vh*0.95 — bewusst FIXE Viewport-Anteile, NICHT von der Hero-Höhe abhängig; das war der Bug, der auf Mobile den Reel schon bei Scroll 0 aufblies). Wachstum ZENTRIERT (Mittelpunkt → Bildmitte), Rest der .reel-Strecke Verweilen, dann absolute ans Sektionsende → scrollt weg. Wichtig fürs Timing: der Reel muss wachsen, SOLANGE die Collage noch dahinter sichtbar ist (sonst wächst er gegen Weiß und der Blur verpufft) — deshalb Hero luftig 170vh + Anker relativ hoch (top:36%). Hintergrund (.hero) bekommt zunehmend `blur()` (MAXBLUR 16px) für den Fokus. prefers-reduced-motion: statische zentrierte Kachel (.reel.static).
 Aktuell Platzhalter-Foto (On-Set-Portrait mit ©Thomas-Voigt-Wasserzeichen!) — sobald Leos Showreel-mp4 da ist: nach `assets/reel/showreel.mp4`, video-Tag ist auskommentiert vorbereitet. Wasserzeichen-Bild vor Launch ersetzen.
 
-### Floating-Kacheln
-Statement-Text liegt HINTER den Kacheln (.statement z-index:1, .tiles z-index:2). Kachel-Seitenverhältnis wird per JS (fitAspect in renderTiles) an das native Bildformat gekoppelt — das `ar` im TILES-Array ist nur noch Startwert gegen Layout-Sprung.
+### Floating-Kacheln (Hero-Collage)
+Statement-Text liegt HINTER den Kacheln (.statement z-index:1, .tiles z-index:2), aber Kacheln sollen die Headline RAHMEN, nicht ersticken — luftig verteilt, Headline gut lesbar, nur Ränder überlappen (Leo-Feedback: eine zu dichte/zentrierte Collage sah schlecht aus). Kachel-Seitenverhältnis wird per JS (fitAspect in renderTiles) an das native Bildformat gekoppelt — das `ar` im TILES-Array ist nur noch Fallback gegen Layout-Sprung.
 
 ### Statement / Intro
 "Different is Everything." — danach kurzer About-Block in großer Serife:
