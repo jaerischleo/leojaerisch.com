@@ -42,7 +42,7 @@ Die Reel-Kachel liegt von Anfang an in der floating Collage (HERO_TILES-Eintrag 
 Aktuell Platzhalter-Foto (On-Set-Portrait mit ©Thomas-Voigt-Wasserzeichen!) — sobald Leos Showreel-mp4 da ist: nach `assets/reel/showreel.mp4`, video-Tag ist auskommentiert vorbereitet. Wasserzeichen-Bild vor Launch ersetzen.
 
 ### Floating-Kacheln (Hero-Collage)
-Statement-Text liegt HINTER den Kacheln (.statement z-index:1, .tiles z-index:2), aber Kacheln sollen die Headline RAHMEN, nicht ersticken — luftig verteilt, Headline gut lesbar, nur Ränder überlappen (Leo-Feedback: eine zu dichte/zentrierte Collage sah schlecht aus). Kachel-Seitenverhältnis wird per JS (fitAspect in renderTiles) an das native Bildformat gekoppelt — das `ar` im TILES-Array ist nur noch Fallback gegen Layout-Sprung.
+Statement-Text liegt auf der UNTERSTEN Ebene (.statement z-index:1, .tiles z-index:2). Leo-Feedback (wichtig): im RUHEZUSTAND darf KEIN Bild die Headline verdecken — sie muss frei/lesbar stehen; die Kacheln flankieren sie nur (SALTY flush links, below flush rechts). Der „Text-hinter-Bild"-Effekt entsteht erst beim SCROLLEN, wenn die Kacheln über den Text wandern. Also: Kachel-Positionen so wählen, dass sie die Headline-Box bei scrollY 0 nicht schneiden (per JS gemessen), Anordnung ansonsten luftig/scattered lassen. Kachel-Seitenverhältnis wird per JS (fitAspect in renderTiles) an das native Bildformat gekoppelt — das `ar` im TILES-Array ist nur noch Fallback gegen Layout-Sprung.
 
 ### Statement / Intro
 "Different is Everything." — danach kurzer About-Block in großer Serife:
