@@ -1,0 +1,150 @@
+/* ============================================================
+   LEO JAERISCH — geteiltes Stylesheet für Projekt-Unterseiten
+   (work/*.html). Design-Tokens & Basis identisch zur Startseite;
+   die index.html nutzt aktuell noch ihr eigenes inline-CSS und
+   sollte mittelfristig ebenfalls hierher migriert werden.
+   ============================================================ */
+:root{
+  --bg:#FCFCFA;
+  --ink:#141414;
+  --mut:#7A7973;
+  --hair:rgba(20,20,20,.12);
+  --serif:'Instrument Serif',serif;
+  --sans:'Hanken Grotesk',sans-serif;
+  --r:10px;
+  --mx:clamp(28px,8vw,120px);
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.55;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ink);color:var(--bg)}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+em{font-family:var(--serif);font-style:italic;font-size:1.08em}
+.serif{font-family:var(--serif);font-weight:400;font-style:normal}
+.small{font-size:12.5px;letter-spacing:.01em;color:var(--mut)}
+.wrap{padding-left:var(--mx);padding-right:var(--mx)}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:26px var(--mx);mix-blend-mode:difference;
+}
+header .logo,header .burger span{color:#fff}
+header .logo{font-weight:500;font-size:17px;letter-spacing:-.01em;color:#fff}
+.burger{width:34px;height:20px;position:relative;background:none;border:0;cursor:pointer}
+.burger span{
+  position:absolute;left:0;right:0;height:1.5px;background:#fff;
+  transition:transform .45s var(--ease),top .45s var(--ease),opacity .3s;
+}
+.burger span:nth-child(1){top:4px}
+.burger span:nth-child(2){top:14px}
+body.menu-open .burger span:nth-child(1){top:9px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){top:9px;transform:rotate(-45deg)}
+
+/* ---------- menu overlay ---------- */
+.menu{
+  position:fixed;inset:0;z-index:90;background:var(--bg);
+  display:flex;flex-direction:column;justify-content:center;padding:0 var(--mx);
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);
+}
+body.menu-open .menu{clip-path:inset(0 0 0 0)}
+.menu a{
+  font-weight:500;letter-spacing:-.02em;font-size:clamp(30px,5vw,54px);line-height:1.2;
+  width:fit-content;display:flex;align-items:baseline;gap:18px;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s;
+}
+body.menu-open .menu a{opacity:1;transform:none}
+body.menu-open .menu a:nth-child(2){transition-delay:.08s}
+body.menu-open .menu a:nth-child(3){transition-delay:.14s}
+body.menu-open .menu a:nth-child(4){transition-delay:.2s}
+body.menu-open .menu a:nth-child(5){transition-delay:.26s}
+.menu a:hover{color:var(--mut)}
+.menu a i{font-family:var(--sans);font-style:normal;font-size:12px;color:var(--mut)}
+.menu .m-foot{position:absolute;bottom:32px;left:var(--mx);right:var(--mx);display:flex;justify-content:space-between}
+
+/* ---------- side notes ---------- */
+.side{position:fixed;top:50%;font-size:11.5px;color:var(--mut);letter-spacing:.02em;z-index:50;white-space:nowrap}
+.side.l{left:18px;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl}
+.side.r{right:18px;transform:translateY(-50%);writing-mode:vertical-rl}
+
+/* ---------- shared link ---------- */
+.lnk{display:inline-block;font-size:14px;border-bottom:1px solid var(--ink);padding-bottom:3px;transition:opacity .3s}
+.lnk:hover{opacity:.5}
+
+/* ============================================================
+   PROJEKT-DETAILSEITE
+   ============================================================ */
+.proj-hero{padding-top:20vh;padding-bottom:5vh}
+.back{display:inline-block;font-size:12.5px;color:var(--mut);margin-bottom:9vh;transition:color .3s}
+.back:hover{color:var(--ink)}
+.proj-label{display:flex;gap:14px;margin-bottom:4vh}
+.proj-title{font-weight:500;letter-spacing:-.03em;line-height:1;font-size:clamp(48px,9vw,132px)}
+.proj-sub{margin-top:3vh;font-size:clamp(20px,2.6vw,34px);font-weight:400;letter-spacing:-.01em;max-width:24ch}
+
+.proj-meta{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:28px;
+  margin-top:8vh;padding-top:3vh;border-top:1px solid var(--hair);
+}
+.proj-meta span{display:block;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.proj-meta b{font-weight:500;font-size:14.5px;line-height:1.4}
+.proj-meta a.lnk{font-size:14.5px;border-color:var(--hair)}
+
+/* lead image full-bleed innerhalb der Ränder */
+.proj-lead{margin:2vh var(--mx) 0;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9}
+.proj-lead img{width:100%;height:100%;object-fit:cover}
+
+/* Beschreibungs-Block: rechts versetzt wie auf der Startseite */
+.proj-body{padding-top:16vh;padding-bottom:6vh}
+.proj-body .lead{font-size:clamp(22px,3vw,40px);font-weight:400;letter-spacing:-.01em;line-height:1.3;max-width:20ch;margin-bottom:6vh}
+.proj-body .cols{margin-left:auto;width:min(720px,62%);color:#3a3a36}
+.proj-body .cols p{margin-bottom:2.2vh;max-width:52ch}
+
+/* Galerie */
+.proj-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,28px);padding-top:4vh;padding-bottom:6vh}
+.proj-gallery figure{border-radius:var(--r);overflow:hidden;background:#eee}
+.proj-gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.proj-gallery figure:hover img{transform:scale(1.03)}
+.proj-gallery .span2{grid-column:1 / -1;aspect-ratio:16/8}
+.proj-gallery .tall{aspect-ratio:4/5}
+.proj-gallery .wide{aspect-ratio:4/3}
+
+/* Fakten */
+.proj-facts{display:flex;flex-wrap:wrap;gap:44px;padding:6vh 0;border-top:1px solid var(--hair);margin:0 var(--mx)}
+.proj-facts b{font-weight:600;font-size:26px;display:block;line-height:1;letter-spacing:-.01em}
+.proj-facts span{font-size:12px;color:var(--mut)}
+
+/* nächstes Projekt */
+.proj-next{display:block;padding:12vh 0 16vh;border-top:1px solid var(--hair);margin:0 var(--mx)}
+.proj-next span{font-size:12.5px;color:var(--mut)}
+.proj-next .t{display:block;margin-top:2vh;font-weight:500;letter-spacing:-.02em;font-size:clamp(30px,5vw,64px);transition:transform .5s var(--ease)}
+.proj-next:hover .t{transform:translateX(14px)}
+
+/* ---------- footer (wie Startseite) ---------- */
+footer{padding:8vh 0 0;text-align:center}
+footer .invite{font-size:13px;color:var(--mut)}
+footer .huge{display:inline-block;font-family:var(--serif);font-weight:400;font-size:clamp(44px,8vw,110px);line-height:1;margin:2vh 0 9vh;transition:font-style .1s,letter-spacing .8s var(--ease)}
+footer .huge:hover{font-style:italic;letter-spacing:.01em}
+.f-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:26px var(--mx);border-top:1px solid var(--hair);font-size:12.5px;color:var(--mut);text-align:left}
+.f-row .grp{display:flex;gap:28px}
+.f-row a{transition:color .3s}
+.f-row a:hover{color:var(--ink)}
+
+/* ---------- responsive ---------- */
+@media(max-width:860px){
+  .side{display:none}
+  .proj-meta{grid-template-columns:1fr 1fr}
+  .proj-body .cols{width:100%}
+  .proj-gallery{grid-template-columns:1fr}
+  .proj-gallery .span2{aspect-ratio:16/10}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}

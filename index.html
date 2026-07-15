@@ -135,6 +135,8 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
   opacity:0;transition:opacity .5s;
 }
 .tile:hover figcaption{opacity:1}
+.tile.link{cursor:pointer}
+.tile figcaption .arr{opacity:.7}
 
 /* ---------- showreel ----------
    Startet als kleine Kachel in der Hero-Collage (.reel-anchor = unsichtbarer
@@ -460,7 +462,7 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
    ============================================================ */
 const HERO_TILES = [
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1799e785-b4ff-48c2-933f-5ab3e25b10ab/Leo_Jaerisch.jpg", cap:"Leo — Hamburg", top:4,  left:17, w:"14vw", speed:.16},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", top:6,  left:66, w:"18vw", speed:-.1},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", href:"work/kuenstlerboerse.html", top:6,  left:66, w:"18vw", speed:-.1},
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png", cap:"FELL — Campaign", top:29, left:1,  w:"11vw", speed:-.14},
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/c72e2bea-c415-4bde-9ca4-6b0ebc7a8946/below-06.png", cap:"below — Brand & UI", top:23, left:84, w:"13vw", speed:.12},
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1413a9d0-2ba7-4857-a9bb-44f139882873/ACTIVA-02.png", cap:"ACTIVA — Campaign", top:58, left:9, w:"14vw", speed:.2},
@@ -483,7 +485,7 @@ const BAND_TILES = [
    ============================================================ */
 const PROJECTS = [
   {title:"Graphic Design",           meta:"Brand & Campaign · ongoing", href:"https://www.leojaerisch.com/start/graphic-design", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png"},
-  {title:"Künstlerbörse",            meta:"Founder & Curation · 2024–26", href:"https://www.leojaerisch.com/start/kuenstlerboerse", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg"},
+  {title:"Künstlerbörse",            meta:"Founder & Curation · 2024–26", href:"work/kuenstlerboerse.html", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg"},
   {title:"éclat Sauvage × Klinkow",  meta:"Video · Direction", href:"https://www.leojaerisch.com/start/eclatsauvage", img:""},
   {title:"Porsche × EHS",            meta:"Video & Photo", href:"https://www.leojaerisch.com/start/porsche", img:""},
   {title:"Documentary",              meta:"Film", href:"https://www.leojaerisch.com/start/documentary", img:""},
@@ -497,14 +499,19 @@ const PROJECTS = [
 /* ---- Kacheln rendern ---- */
 function renderTiles(list, host){
   host.innerHTML = list.map(t=>{
-    const media = t.type==="anchor" ? ""
-      : t.type==="video"
+    /* ar nur Fallback gegen Layout-Sprung; echtes Bildformat kommt per fitAspect */
+    const style = `top:${t.top}%;left:${t.left}%;width:${t.w};aspect-ratio:${t.ar||'1/1'}`;
+    if(t.type==="anchor")
+      return `<figure class="tile reel-anchor" data-speed="${t.speed}" style="${style}"></figure>`;
+    const media = t.type==="video"
       ? `<video src="${t.src}" autoplay muted loop playsinline></video>`
       : `<img src="${t.src}" alt="${t.cap}" loading="lazy">`;
-    const cls = t.type==="anchor" ? "tile reel-anchor" : "tile";
-    const cap = t.cap ? `<figcaption>${t.cap}</figcaption>` : "";
-    /* ar nur Fallback gegen Layout-Sprung; echtes Bildformat kommt per fitAspect */
-    return `<figure class="${cls}" data-speed="${t.speed}" style="top:${t.top}%;left:${t.left}%;width:${t.w};aspect-ratio:${t.ar||'1/1'}">${media}${cap}</figure>`;
+    const cap = t.cap ? `<figcaption>${t.cap}${t.href?' <span class="arr">↗</span>':''}</figcaption>` : "";
+    /* verlinkte Kachel = <a> mit Positionierung (echter Link, ganze Kachel klickbar) */
+    const tag = t.href ? 'a' : 'figure';
+    const attr = t.href ? ` href="${t.href}"` : '';
+    const cls = t.href ? 'tile link' : 'tile';
+    return `<${tag} class="${cls}" data-speed="${t.speed}"${attr} style="${style}">${media}${cap}</${tag}>`;
   }).join('');
   /* Kachelformat an das native Seitenverhältnis des Bildes anpassen */
   host.querySelectorAll('.tile img').forEach(img=>{

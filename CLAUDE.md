@@ -88,7 +88,11 @@ E-Mail-Adresse überall: jaerisch.leo@gmail.com.
 - Projektdaten zentral halten (PROJECTS-Array bzw. später `js/projects.js`) — neues Projekt = ein Eintrag.
 - Bilder/Videos lokal unter `assets/` mit sprechenden Namen (`assets/work/fell-feed.png`, `assets/kb/edition-4.jpg`, `assets/reel/porsche.mp4`). Aktuell zeigen die src noch auf Squarespace-CDN — schrittweise migrieren. Bilder fürs Web optimieren (WebP/AVIF wo sinnvoll, lazy loading).
 - Videos in Kacheln: mp4, `autoplay muted loop playsinline`, kurz und klein komprimiert.
-- Unterseiten pro Projekt sind geplant: gleiche Kopf/Fuß-Struktur, gleiches Stylesheet, z.B. `work/kuenstlerboerse.html`.
+- Projekt-Unterseiten: liegen in `work/` (Beispiel steht: `work/kuenstlerboerse.html`). Sie teilen sich `css/style.css` (Design-Tokens, Header/Menu/Footer, Sidenotes + Projekt-Detail-Layout: .proj-hero/.proj-body/.proj-gallery/.proj-facts/.proj-next). Achtung auch hier: .wrap-Sektionen NIE mit padding-Kurzform — immer padding-top/-bottom, sonst stirbt der Seitenrand.
+  - Neue Projektseite = `work/<slug>.html` aus dem KB-Beispiel kopieren, Texte/Bilder/Meta tauschen, `next`-Link setzen. Galerie-Klassen: .span2 (breit), .tall (4/5), .wide (4/3).
+  - Verlinkung von der Startseite: HERO_TILES-Eintrag bekommt `href:"work/<slug>.html"` (renderTiles macht daraus ein <a class="tile link"> — echter Link, Parallax bleibt) und der passende PROJECTS-Eintrag zeigt auf dieselbe Datei.
+  - index.html nutzt weiterhin sein eigenes inline-CSS (bewusst nicht angefasst, damit die Startseite stabil bleibt); css/style.css ist die geteilte Basis für die Unterseiten und Ziel für eine spätere Migration der Startseite.
+  - Bilder auf den Unterseiten sind aktuell Platzhalter (Squarespace-CDN); Leo liefert echte Projektbilder nach → dann `assets/<projekt>/…` einsetzen.
 - SEO: sinnvolle Title/Meta/OG pro Seite, JSON-LD Person-Schema, semantisches HTML, Alt-Texte. Wenig sichtbarer Text ist okay — Meta-Ebene trägt das SEO.
 - Responsive bis Mobil, `prefers-reduced-motion` respektieren.
 
