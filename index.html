@@ -224,6 +224,7 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 }
 .card .cap .t{font-weight:500;font-size:15px;letter-spacing:.01em}
 .card .cap .m{font-size:11.5px;opacity:.85;text-align:right}
+.card .badge{position:absolute;top:14px;left:14px;z-index:2;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px}
 /* Platzhalter ohne Cover-Bild */
 .card.ph{
   background:#efeeea;color:var(--ink);
@@ -490,6 +491,7 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
 
 <div class="preview" id="preview"><img id="previewImg" src="" alt=""></div>
 
+<script src="js/projects.js"></script>
 <script>
 /* ============================================================
    MEDIEN-KACHELN
@@ -498,7 +500,7 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
    ============================================================ */
 const HERO_TILES = [
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1799e785-b4ff-48c2-933f-5ab3e25b10ab/Leo_Jaerisch.jpg", cap:"Leo — Hamburg", top:4,  left:17, w:"14vw", speed:.16},
-  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", href:"work/kuenstlerboerse.html", top:6,  left:66, w:"18vw", speed:-.1},
+  {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ee3b25a9-5fc7-4a6e-8951-6accca708a54/WhatsApp+Image+2025-08-28+at+23.55.02+%281%29.jpeg", cap:"Künstlerbörse", href:"work/project.html?p=kuenstlerboerse", top:6,  left:66, w:"18vw", speed:-.1},
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png", cap:"FELL — Campaign", top:29, left:1,  w:"11vw", speed:-.14},
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/c72e2bea-c415-4bde-9ca4-6b0ebc7a8946/below-06.png", cap:"below — Brand & UI", top:23, left:84, w:"13vw", speed:.12},
   {type:"img", src:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/1413a9d0-2ba7-4857-a9bb-44f139882873/ACTIVA-02.png", cap:"ACTIVA — Campaign", top:58, left:9, w:"14vw", speed:.2},
@@ -528,24 +530,7 @@ const SERVICES = [
   {title:"Digital & Product", meta:"Interfaces with clarity",     img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6dae63da-0004-4778-a9db-605a545da9d0/PEACELESS_FEED.png"},
 ];
 
-/* ============================================================
-   PROJEKTE (Selected-Work-Raster).
-   img = Cover fürs Raster (leer = Platzhalterkachel).
-   href = Projekt-Unterseite (leer = noch keine Seite → nicht klickbar).
-   Neue Projektseite anlegen → hier href:"work/<slug>.html" setzen.
-   ============================================================ */
-const PROJECTS = [
-  {title:"Graphic Design",           meta:"Brand & Campaign", href:"", img:"assets/graphic-design/graphic-design-02.jpg"},
-  {title:"Künstlerbörse",            meta:"Founder & Curation", href:"work/kuenstlerboerse.html", img:"assets/kuenstlerboerse/kuenstlerboerse-01.jpg"},
-  {title:"Meraki Studios × Zoleo",   meta:"Campaign", href:"", img:"assets/zoleo/zoleo-01.jpg"},
-  {title:"Porsche × EHS",            meta:"Video & Photo", href:"", img:"assets/porsche-ehs/porsche-01.jpg"},
-  {title:"Faces",                    meta:"Photography", href:"", img:"assets/faces/faces-01.jpg"},
-  {title:"Sail GP",                  meta:"Event & Photo", href:"", img:"assets/sail-gp/sail-gp-01.jpg"},
-  {title:"éclat Sauvage × Klinkow",  meta:"Video · Direction", href:"", img:""},
-  {title:"Documentary",              meta:"Film", href:"", img:""},
-  {title:"Cold Gentleman × Klinkow", meta:"Video", href:"", img:""},
-  {title:"Builders × EHS",           meta:"Photo & Documentary", href:"", img:""},
-];
+/* PROJEKTE: zentral in js/projects.js (PROJECT_ORDER + PROJECTS_DATA) */
 
 /* ---- Kacheln rendern ---- */
 function renderTiles(list, host){
@@ -580,19 +565,14 @@ document.getElementById('servicesList').innerHTML = SERVICES.map(s=>`
     <span class="meta">${s.meta}</span>
   </div>`).join('');
 
-/* ---- Selected-Work-Raster rendern ---- */
-document.getElementById('workGrid').innerHTML = PROJECTS.map(p=>{
+/* ---- Selected-Work-Raster rendern (aus js/projects.js) ---- */
+document.getElementById('workGrid').innerHTML = PROJECT_ORDER.map(slug=>{
+  const p = PROJECTS_DATA[slug];
+  const cover = p.images[0];
+  const badge = p.video ? '<span class="badge">▶ Film</span>' : '';
   const cap = `<div class="cap"><span class="t">${p.title}</span><span class="m">${p.meta}</span></div>`;
-  if(!p.img){
-    const inner = `<span class="ph-title">${p.title}</span><span class="ph-meta">${p.meta}</span>`;
-    return p.href
-      ? `<a class="card ph" href="${p.href}">${inner}</a>`
-      : `<div class="card ph">${inner}</div>`;
-  }
-  const inner = `<img src="${p.img}" alt="${p.title}" loading="lazy"><span class="lens" style="background-image:url('${p.img}')"></span>${cap}`;
-  return p.href
-    ? `<a class="card" href="${p.href}">${inner}</a>`
-    : `<div class="card">${inner}</div>`;
+  const inner = `<img src="${cover}" alt="${p.title}" loading="lazy"><span class="lens" style="background-image:url('${cover}')"></span>${badge}${cap}`;
+  return `<a class="card" href="work/project.html?p=${slug}">${inner}</a>`;
 }).join('');
 
 /* ---- radialer Fokus folgt der Maus über den Rasterkacheln ---- */

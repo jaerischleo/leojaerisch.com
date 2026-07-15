@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — Leo Jaerisch</title>
+<meta name="description" content="Project by Leo Jaerisch — art direction, design, photography and film from Hamburg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/projects.js"></script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="../index.html">Leo Jaerisch</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<nav class="menu" id="menu">
+  <a href="../index.html#work">Work <i>selected</i></a>
+  <a href="../index.html#services">Services <i>what I do</i></a>
+  <a href="../index.html#founded">Founded <i>Künstlerbörse · Zoleo</i></a>
+  <a href="../index.html#about">About <i>process & AI</i></a>
+  <a href="../index.html#inquiry">Contact <i>say hi</i></a>
+  <div class="m-foot small">
+    <span>Hamburg, Germany</span>
+    <a href="https://www.instagram.com/leo_jaerisch/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</nav>
+
+<div class="side l">&copy; 2026</div>
+<div class="side r">Made in Hamburg.</div>
+
+<main id="proj"><!-- per JS aus PROJECTS_DATA --></main>
+
+<footer>
+  <p class="invite">Open for freelance projects and collaborations.</p>
+  <a class="huge" href="mailto:jaerisch.leo@gmail.com">Let's talk.</a>
+  <div class="f-row">
+    <span>&copy; <span id="year"></span> Leo Jaerisch — Hamburg</span>
+    <div class="grp">
+      <a href="mailto:jaerisch.leo@gmail.com">jaerisch.leo@gmail.com</a>
+      <a href="https://www.instagram.com/leo_jaerisch/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const A = s => '../' + s;                          // Root-Pfad -> relativ zu work/
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('p');
+  const p = PROJECTS_DATA[slug];
+  const host = document.getElementById('proj');
+
+  if(!p){
+    host.innerHTML = '<section class="proj-hero wrap"><a class="back" href="../index.html#work">← Work</a><h1 class="proj-title">Not found</h1><p class="proj-sub">This project doesn’t exist (yet).</p></section>';
+  } else {
+    document.title = p.title + ' — Leo Jaerisch';
+    const idx = PROJECT_ORDER.indexOf(slug);
+    const next = PROJECT_ORDER[(idx+1) % PROJECT_ORDER.length];
+    const nextP = PROJECTS_DATA[next];
+
+    // Hero: Video wenn vorhanden, sonst erstes Bild
+    let hero;
+    if(p.video){
+      hero = `<div class="proj-video"><video src="${A(p.video)}" autoplay muted loop playsinline controls poster="${A(p.images[0])}"></video></div>`;
+    } else {
+      hero = `<figure class="proj-lead"><img src="${A(p.images[0])}" alt="${p.title}"></figure>`;
+    }
+
+    // Galerie: bei Video alle Bilder, sonst ab dem zweiten
+    const gal = (p.video ? p.images : p.images.slice(1));
+    const galHtml = gal.map((src,i)=>{
+      const cls = (i % 5 === 0) ? 'span2' : (i % 2 ? 'tall' : 'wide');
+      return `<figure class="${cls}"><img src="${A(src)}" alt="${p.title} ${i+1}" loading="lazy"></figure>`;
+    }).join('');
+
+    const factsHtml = p.facts ? `<div class="proj-facts">${p.facts.map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join('')}</div>` : '';
+    const bodyHtml = p.body ? `<section class="proj-body wrap"><p class="lead">${p.sub}</p><div class="cols"><p>${p.body}</p></div></section>` : '';
+    const linkMeta = p.link ? `<div><span>Link</span><a class="lnk" href="${p.link.href}" target="_blank" rel="noopener">${p.link.label} ↗</a></div>` : '';
+    const noteHtml = p.note ? `<p class="small" style="margin:0 var(--mx);padding-top:4vh">${p.note}</p>` : '';
+
+    host.innerHTML = `
+      <section class="proj-hero wrap">
+        <a class="back" href="../index.html#work">← Work</a>
+        <div class="proj-label small"><span>Selected Work</span><span>${p.meta}</span></div>
+        <h1 class="proj-title">${p.title}</h1>
+        <p class="proj-sub">${p.sub}</p>
+        <div class="proj-meta">
+          <div><span>Role</span><b>${p.role}</b></div>
+          <div><span>Year</span><b>${p.year}</b></div>
+          <div><span>Category</span><b>${p.meta}</b></div>
+          ${linkMeta}
+        </div>
+      </section>
+      ${hero}
+      ${bodyHtml}
+      <section class="proj-gallery wrap">${galHtml}</section>
+      ${factsHtml}
+      ${noteHtml}
+      <a class="proj-next" href="project.html?p=${next}">
+        <span>Next project</span>
+        <span class="t">${nextP.title} →</span>
+      </a>`;
+  }
+
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+  document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
