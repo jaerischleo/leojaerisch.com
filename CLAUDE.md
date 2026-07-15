@@ -56,6 +56,11 @@ Hero/Showreel → 01 About → **02 Services** → **03 Selected Work** → 04 F
   - **Hover-Effekt** (Leo-Wunsch): radialer Fokus/Blur — eine unscharfe Bildkopie (.lens) liegt über dem scharfen Bild und wird per `mask:radial-gradient(circle … at var(--x) var(--y))` am Cursor „aufgestochen" (scharfer Kreis folgt der Maus, Rest bleibt unscharf). --x/--y setzt ein mousemove-Handler; nicht-gehoverte Karten dimmen. Radius/Blur in .card .lens tunen.
 - **„What I do"-Grid ist RAUS** (durch die Services-Liste ersetzt) — .svc-CSS liegt ungenutzt brach, kann später weg.
 
+### Bild-Assets (Juli 2026: Leos Export sortiert & optimiert)
+Leos ~142 Projektbilder liegen optimiert (max 2000px, JPEG q80) in `assets/<projekt>/<projekt>-NN.jpg`. Sicher zugeordnet: `graphic-design` (26), `zoleo` (31), `porsche-ehs` (14, L101*=Porsche Taycan), `kuenstlerboerse` (6), `faces` (9, Model-Porträts), `sail-gp` (1), `portrait` (19, Leo selbst — für About/Hero). Das Raster/Founded/KB-Unterseite nutzen jetzt diese lokalen Pfade (nicht mehr Squarespace-CDN).
+**Noch NICHT zugeordnet** (in `assets/_review/`, per .gitignore NICHT im Repo, warten auf Leos Bestätigung welche zu welchem Projekt): `helicopter` (DSCF*, Heli über Elbe), `event` (2J4A/0Y8A*, Vernissage/Straße), `mountain` (_MG*, Berg-Lifestyle), `unbenannt`, `screens` (UI-Screenshots), `misc` (u.a. Me_COPYRIGHT_TV = Wasserzeichen). Kandidaten-Projekte ohne Bilder: éclat Sauvage, Documentary, Cold Gentleman, Builders×EHS.
+Hero-Collage, Services-Hover-Bilder und der Reel-Platzhalter zeigen noch auf Squarespace-CDN — vor Launch ebenfalls auf lokale assets migrieren (Squarespace-URLs sterben, sobald Leo das alte Abo kündigt). Original-Export als `~/Desktop/leojaerisch-Archiv.zip` gesichert.
+
 ### Projekt-Content (für Werkliste/Raster & Unterseiten)
 1. Graphic Design — Brand & Campaign (FELL, Float Banking, PEACELESS, below, ACTIVA, FREAKS)
 2. Künstlerbörse — Founder & Curation, 2024–26
