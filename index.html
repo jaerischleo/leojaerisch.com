@@ -196,6 +196,43 @@ body.menu-open .menu a:nth-child(5){transition-delay:.26s}
 .preview.on{opacity:1;transform:translate(-50%,-55%) scale(1)}
 .preview img{width:100%;height:100%;object-fit:cover}
 
+/* ---------- selected work grid (Raster + radialer Fokus) ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,18px)}
+.card{
+  position:relative;display:block;aspect-ratio:4/5;border-radius:var(--r);
+  overflow:hidden;background:#e9e9e6;color:#fff;
+  transition:opacity .45s var(--ease);
+}
+.grid:hover .card{opacity:.5}
+.grid .card:hover{opacity:1}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
+.card:hover img{transform:scale(1.05)}
+/* unscharfe Kopie oben drüber, per radialer Maske am Cursor „aufgestochen" */
+.card .lens{
+  position:absolute;inset:-16px;background-size:cover;background-position:center;
+  filter:blur(16px) saturate(1.25) brightness(.96);opacity:0;
+  transform:scale(1.06);transition:opacity .5s var(--ease);
+  -webkit-mask-image:radial-gradient(circle 230px at var(--x,50%) var(--y,50%),transparent 0,transparent 52%,#000 100%);
+          mask-image:radial-gradient(circle 230px at var(--x,50%) var(--y,50%),transparent 0,transparent 52%,#000 100%);
+  pointer-events:none;
+}
+.card:hover .lens{opacity:1}
+.card .cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:10px;
+  background:linear-gradient(transparent,rgba(0,0,0,.55));
+}
+.card .cap .t{font-weight:500;font-size:15px;letter-spacing:.01em}
+.card .cap .m{font-size:11.5px;opacity:.85;text-align:right}
+/* Platzhalter ohne Cover-Bild */
+.card.ph{
+  background:#efeeea;color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:20px;gap:9px;
+}
+.card.ph .ph-title{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);line-height:1.05}
+.card.ph .ph-meta{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+
 /* ---------- collage band ---------- */
 .band{position:relative;height:120vh;margin:4vh var(--mx)}
 
@@ -288,8 +325,12 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
   .preview{display:none}
   .band{height:80vh}
   .w-list{width:100%}
+  .grid{grid-template-columns:repeat(2,1fr)}
   .form{width:100%}
   .form .row{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -307,7 +348,8 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
 </header>
 
 <nav class="menu" id="menu">
-  <a href="#work">Work <i>10 projects</i></a>
+  <a href="#work">Work <i>selected</i></a>
+  <a href="#services">Services <i>what I do</i></a>
   <a href="#founded">Founded <i>Künstlerbörse · Zoleo</i></a>
   <a href="#about">About <i>process & AI</i></a>
   <a href="#inquiry">Contact <i>say hi</i></a>
@@ -346,13 +388,22 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
   <p class="big mut fade-line" style="margin-top:3vh">Curiosity, discipline, instinct — <em>and AI deep in the process.</em> More iterations, sharper ideas. The signature stays mine.</p>
 </section>
 
-<!-- ================= WORK ================= -->
+<!-- ================= SERVICES (Liste mit Hover-Referenzbild) ================= -->
+<section id="services" class="wrap">
+  <div class="w-head">
+    <div class="label small" style="display:flex;gap:14px"><span>02</span><span>Services</span></div>
+    <span class="small">What I do</span>
+  </div>
+  <div class="w-list" id="servicesList"><!-- per JS aus SERVICES --></div>
+</section>
+
+<!-- ================= SELECTED WORK (Raster mit Cover + radialem Fokus) ================= -->
 <section id="work" class="wrap">
   <div class="w-head">
-    <div class="label small" style="display:flex;gap:14px"><span>02</span><span>Selected Work</span></div>
+    <div class="label small" style="display:flex;gap:14px"><span>03</span><span>Selected Work</span></div>
     <span class="small">2023 — 2026</span>
   </div>
-  <div class="w-list" id="workList"><!-- per JS aus PROJECTS --></div>
+  <div class="grid" id="workGrid"><!-- per JS aus PROJECTS --></div>
 </section>
 
 <!-- ================= COLLAGE BAND ================= -->
@@ -360,7 +411,7 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
 
 <!-- ================= FOUNDED ================= -->
 <section id="founded" class="wrap">
-  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>03</span><span>Founded</span></div>
+  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>04</span><span>Founded</span></div>
   <div class="fd">
     <div class="fd-item">
       <div class="txt">
@@ -391,19 +442,6 @@ footer .huge:hover{font-style:italic;letter-spacing:.01em}
         <img src="https://images.squarespace-cdn.com/content/v1/6732213c52050d7b30ef48d0/52745ac1-6ef4-4e79-bb06-e5a6e740d231/Leo_Jaerisch_ZOLEO-33.jpg?format=1500w" alt="Architecture photography by Zoleo — black timber house" loading="lazy">
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ================= SERVICES ================= -->
-<section id="services" class="wrap">
-  <div class="label small" style="display:flex;gap:14px;margin-bottom:5vh"><span>04</span><span>What I do</span></div>
-  <div class="svc">
-    <div><h3>Art Direction</h3><p>Visual concepts, guided from first idea to final execution.</p></div>
-    <div><h3>Brand & Identity</h3><p>Attitude, translated into a clear visual language.</p></div>
-    <div><h3>Campaign</h3><p>Strong imagery meets clear messaging, across channels.</p></div>
-    <div><h3>Design Systems</h3><p>Structure and clarity that scale, digital and physical.</p></div>
-    <div><h3>Image & Motion</h3><p>Photography and motion, finished with care.</p></div>
-    <div><h3>Digital & Product</h3><p>Interfaces with hierarchy, clarity and usability.</p></div>
   </div>
 </section>
 
@@ -480,20 +518,35 @@ const BAND_TILES = [
 ];
 
 /* ============================================================
-   PROJEKTE — neue Projekte: eine Zeile ergänzen.
-   img = Hover-Preview (leer lassen = kein Preview)
+   SERVICES — Textliste mit Referenzbild beim Hovern (schwebende Preview).
+   img = Beispiel-/Referenzbild.
+   ============================================================ */
+const SERVICES = [
+  {title:"Art Direction",     meta:"Concept to final cut",        img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png"},
+  {title:"Brand & Identity",  meta:"Attitude into a visual language", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6eb94636-6d2a-4716-bc03-03b10950f9c1/FREAK-02.jpeg"},
+  {title:"Campaign",          meta:"Imagery meets message",       img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/e12d24a4-cd72-4e98-a27a-38b276d36588/Float_Banking.png"},
+  {title:"Design Systems",    meta:"Structure that scales",       img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/c72e2bea-c415-4bde-9ca4-6b0ebc7a8946/below-06.png"},
+  {title:"Image & Motion",    meta:"Photography and film",        img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg"},
+  {title:"Digital & Product", meta:"Interfaces with clarity",     img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6dae63da-0004-4778-a9db-605a545da9d0/PEACELESS_FEED.png"},
+];
+
+/* ============================================================
+   PROJEKTE (Selected-Work-Raster).
+   img = Cover fürs Raster (leer = Platzhalterkachel).
+   href = Projekt-Unterseite (leer = noch keine Seite → nicht klickbar).
+   Neue Projektseite anlegen → hier href:"work/<slug>.html" setzen.
    ============================================================ */
 const PROJECTS = [
-  {title:"Graphic Design",           meta:"Brand & Campaign · ongoing", href:"https://www.leojaerisch.com/start/graphic-design", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png"},
-  {title:"Künstlerbörse",            meta:"Founder & Curation · 2024–26", href:"work/kuenstlerboerse.html", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg"},
-  {title:"éclat Sauvage × Klinkow",  meta:"Video · Direction", href:"https://www.leojaerisch.com/start/eclatsauvage", img:""},
-  {title:"Porsche × EHS",            meta:"Video & Photo", href:"https://www.leojaerisch.com/start/porsche", img:""},
-  {title:"Documentary",              meta:"Film", href:"https://www.leojaerisch.com/start/documentary", img:""},
-  {title:"Meraki Studios × Zoleo",   meta:"Campaign", href:"https://www.leojaerisch.com/start/zoleo", img:""},
-  {title:"Faces",                    meta:"Photography", href:"https://www.leojaerisch.com/start/faces", img:""},
-  {title:"Cold Gentleman × Klinkow", meta:"Video", href:"https://www.leojaerisch.com/start/coldgents", img:""},
-  {title:"Builders × EHS",           meta:"Photo & Documentary", href:"https://www.leojaerisch.com/start/workers", img:""},
-  {title:"Sail GP",                  meta:"Event & Photo", href:"https://www.leojaerisch.com/start/sailgp", img:""},
+  {title:"Graphic Design",           meta:"Brand & Campaign", href:"", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/fdaf24a9-95d7-4383-aad5-acce2f50c20a/FELL_Feed_Faces.png"},
+  {title:"Künstlerbörse",            meta:"Founder & Curation", href:"work/kuenstlerboerse.html", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/ddf187bb-f50f-40bc-9d42-98a4792e8257/WhatsApp+Image+2025-08-28+at+23.55.05.jpeg"},
+  {title:"Meraki Studios × Zoleo",   meta:"Campaign", href:"", img:"https://images.squarespace-cdn.com/content/v1/6732213c52050d7b30ef48d0/52745ac1-6ef4-4e79-bb06-e5a6e740d231/Leo_Jaerisch_ZOLEO-33.jpg?format=1200w"},
+  {title:"Faces",                    meta:"Photography", href:"", img:"https://images.squarespace-cdn.com/content/v1/68e00962ef80ff1b7a1b0833/6eb94636-6d2a-4716-bc03-03b10950f9c1/FREAK-02.jpeg"},
+  {title:"éclat Sauvage × Klinkow",  meta:"Video · Direction", href:"", img:""},
+  {title:"Porsche × EHS",            meta:"Video & Photo", href:"", img:""},
+  {title:"Documentary",              meta:"Film", href:"", img:""},
+  {title:"Cold Gentleman × Klinkow", meta:"Video", href:"", img:""},
+  {title:"Builders × EHS",           meta:"Photo & Documentary", href:"", img:""},
+  {title:"Sail GP",                  meta:"Event & Photo", href:"", img:""},
 ];
 
 /* ---- Kacheln rendern ---- */
@@ -522,12 +575,36 @@ function renderTiles(list, host){
 renderTiles(HERO_TILES, document.getElementById('heroTiles'));
 renderTiles(BAND_TILES, document.getElementById('bandTiles'));
 
-/* ---- Projektliste rendern ---- */
-document.getElementById('workList').innerHTML = PROJECTS.map(p=>`
-  <a class="w-item" href="${p.href}" data-img="${p.img}">
-    <span class="t">${p.title}</span>
-    <span class="meta">${p.meta}</span>
-  </a>`).join('');
+/* ---- Services-Liste rendern (schwebende Referenz-Preview beim Hovern) ---- */
+document.getElementById('servicesList').innerHTML = SERVICES.map(s=>`
+  <div class="w-item" data-img="${s.img}">
+    <span class="t">${s.title}</span>
+    <span class="meta">${s.meta}</span>
+  </div>`).join('');
+
+/* ---- Selected-Work-Raster rendern ---- */
+document.getElementById('workGrid').innerHTML = PROJECTS.map(p=>{
+  const cap = `<div class="cap"><span class="t">${p.title}</span><span class="m">${p.meta}</span></div>`;
+  if(!p.img){
+    const inner = `<span class="ph-title">${p.title}</span><span class="ph-meta">${p.meta}</span>`;
+    return p.href
+      ? `<a class="card ph" href="${p.href}">${inner}</a>`
+      : `<div class="card ph">${inner}</div>`;
+  }
+  const inner = `<img src="${p.img}" alt="${p.title}" loading="lazy"><span class="lens" style="background-image:url('${p.img}')"></span>${cap}`;
+  return p.href
+    ? `<a class="card" href="${p.href}">${inner}</a>`
+    : `<div class="card">${inner}</div>`;
+}).join('');
+
+/* ---- radialer Fokus folgt der Maus über den Rasterkacheln ---- */
+document.querySelectorAll('#workGrid .card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--x',(e.clientX-r.left)+'px');
+    card.style.setProperty('--y',(e.clientY-r.top)+'px');
+  });
+});
 
 /* ---- Sanfter Parallax (gelerpt = butterweich) ---- */
 const tiles = [...document.querySelectorAll('[data-speed]')];

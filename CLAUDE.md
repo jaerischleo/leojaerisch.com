@@ -49,7 +49,14 @@ Statement-Text liegt auf der UNTERSTEN Ebene (.statement z-index:1, .tiles z-ind
 Galerist, Grafikdesigner, Art Director. Baut Marken, Kampagnen und Räume, in denen Kunst stattfindet.
 AI-Satz (wichtig, aber unaufgeregt): "AI deep in the process. More iterations, sharper ideas — the signature stays mine."
 
-### Projekte (Werkliste — Grafikbereich bewusst nach vorn)
+### Seitenreihenfolge (Stand nach Leo-Umbau Juli 2026)
+Hero/Showreel → 01 About → **02 Services** → **03 Selected Work** → 04 Founded → 05 Inquiry → Footer.
+- **02 Services**: die interaktive Textliste (früher „Selected Work") mit schwebender Referenz-Bild-Vorschau beim Hovern (SERVICES-Array → #servicesList als .w-item, data-img = Beispielbild; nutzt denselben .preview-Mechanismus). Enthält die 6 Leistungen.
+- **03 Selected Work**: aufgeräumtes **Raster** (.grid, 3 Spalten) aus PROJECTS mit Cover-Bildern, verlinkt zu den Projekt-Unterseiten (`work/<slug>.html`). Cover fehlt → helle Platzhalterkachel (.card.ph) mit Serifen-Titel. href leer → (noch) nicht klickbar. Nur Künstlerbörse hat aktuell eine Seite.
+  - **Hover-Effekt** (Leo-Wunsch): radialer Fokus/Blur — eine unscharfe Bildkopie (.lens) liegt über dem scharfen Bild und wird per `mask:radial-gradient(circle … at var(--x) var(--y))` am Cursor „aufgestochen" (scharfer Kreis folgt der Maus, Rest bleibt unscharf). --x/--y setzt ein mousemove-Handler; nicht-gehoverte Karten dimmen. Radius/Blur in .card .lens tunen.
+- **„What I do"-Grid ist RAUS** (durch die Services-Liste ersetzt) — .svc-CSS liegt ungenutzt brach, kann später weg.
+
+### Projekt-Content (für Werkliste/Raster & Unterseiten)
 1. Graphic Design — Brand & Campaign (FELL, Float Banking, PEACELESS, below, ACTIVA, FREAKS)
 2. Künstlerbörse — Founder & Curation, 2024–26
 3. éclat Sauvage × Klinkow — Video/Direction
@@ -63,14 +70,12 @@ AI-Satz (wichtig, aber unaufgeregt): "AI deep in the process. More iterations, s
 
 Hinweis auf der Seite nötig: Mit *EHS* markierte Arbeiten entstanden im Rahmen der Anstellung bei EHS Media (ehsmedia.de).
 
-### Founded (Sektion 03 — ersetzt die reine Künstlerbörse-Sektion)
+### Founded (Sektion 04 — ersetzt die reine Künstlerbörse-Sektion)
 Zwei Einträge:
 1. Künstlerbörse — Founder & Curator, 2024–26. Plattform für junge Künstler:innen, Revival eines Hamburger 90er-Formats. "Art & music, raw and real." Fakten: 4 Editionen · 250+ Gäste pro Vernissage · Locations: Cramer Wohnvilla & Schanzenhöfe. Link: kuenstlerboerse.net
 2. Zoleo — Co-Founder. "Visual communication for architecture and space" (zoleo-hamburg.com). Bild: schwarzes Blockhaus (Leo_Jaerisch_ZOLEO-33.jpg vom Zoleo-Squarespace-CDN).
 Layout bewusst asymmetrisch/dynamisch: KB Text links + Bild rechts (4/3), Zoleo Bild links schmaler (4/5, max 440px) + Text rechts versetzt; beide Bilder haben leichtes Parallax via data-speed.
 
-### Services (kompakt, keine Cards)
-Art Direction · Brand & Identity · Campaign & Communication · Design Systems · Image & Motion · Digital & Product
 
 ### Inquiry-Formular (Sektion 05, vor dem Footer)
 Name / Email / Project (Textarea), versendet über FormSubmit (formsubmit.co) an jaerisch.leo@gmail.com.
